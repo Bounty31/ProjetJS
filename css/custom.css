@@ -1,0 +1,29 @@
+body{
+	
+
+}
+.monMenu{
+	height: 30%;
+	background: #768383;
+	box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.5);
+	position: relative;
+
+}
+
+.rond{
+	border-radius: 50%;
+	box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.5);
+	transition : all 0.2s;
+}
+.rond:hover{	
+	transform: scale(1.05);
+	box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.5);
+}
+.mainPan{
+	background-color: #8C9D9D;
+	height: 80%;
+}
+
+#connexion{
+	text-align: center;
+}
