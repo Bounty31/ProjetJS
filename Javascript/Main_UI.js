@@ -14,6 +14,8 @@ var c2 = document.getElementById("rond2");
 // cercle droite et gauche
 var c1 = document.getElementById("rond1");
 var c3 = document.getElementById("rond3");
+//cercle connexion
+var c4 = document.getElementById("butConnexion");
 
 //style rond milieu
 c2.style.width = mWidth/4+"px";
@@ -22,6 +24,13 @@ c2.style.backgroundColor = "white";
 c2.style.position = "absolute";
 c2.style.left = (mWidth/2 - mWidth/8) + "px";
 c2.style.top =(mHeight - mWidth/8) + "px";
+
+//style rond connexion
+c4.style.width = mWidth/16+"px";
+c4.style.height = mWidth/16+"px";
+c4.style.position = "absolute";
+c4.style.left = (mWidth/2 - mWidth/32) + "px";
+c4.style.top =(mHeight + mWidth/8) + "px";
 
 
 //style rond  gauche
@@ -54,3 +63,9 @@ function getPosition(element) {
 }
 window.onresize = function(){
 	resize();}
+
+function setConnexionPan () {
+	document.getElementById("mainLogo").style.display = "none";
+	document.getElementById("connexionPan").style.display = "block";
+	var connexionPan = document.getElementById("rond2");
+}

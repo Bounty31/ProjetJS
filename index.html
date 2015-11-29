@@ -16,9 +16,16 @@
 	<div id="menuBar" class="monMenu row">	
 		<div id="rond1" class="rond"></div>
 		<div id="rond2" class="rond">
-			<img src="Images/logo.svg" alt="logo">
-			<div id="butConnexion"><img src="images/login.svg" alt="login"></div>
+			<img id="mainLogo" src="Images/logo.svg" alt="logo">
+			<div id="connexionPan">
+			Ouh baby !
+				<label for="identifiant">Identifiant : </label>
+				<input id="identifiant" type="text">
+				<label for="password">Mot de passe : </label>
+				<input id="password" type="password">
+			</div>
 		</div>
+		<div class = "rond" id="butConnexion" onclick="setConnexionPan()"><img src="images/login.svg" alt="login"></div>
 		<div id="rond3" class="rond"></div>
 		
 	</div>
