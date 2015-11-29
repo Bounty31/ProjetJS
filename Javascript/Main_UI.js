@@ -30,7 +30,7 @@ c4.style.width = mWidth/16+"px";
 c4.style.height = mWidth/16+"px";
 c4.style.position = "absolute";
 c4.style.left = (mWidth/2 - mWidth/32) + "px";
-c4.style.top =(mHeight + mWidth/8) + "px";
+c4.style.top =(mWidth/4 - mWidth/20) + "px";
 
 
 //style rond  gauche
@@ -65,7 +65,7 @@ window.onresize = function(){
 	resize();}
 
 function setConnexionPan () {
-	document.getElementById("mainLogo").style.display = "none";
 	document.getElementById("connexionPan").style.display = "block";
+	document.getElementById("rond2").style.height = "300%";
 	var connexionPan = document.getElementById("rond2");
 }
