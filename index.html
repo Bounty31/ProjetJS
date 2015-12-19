@@ -4,46 +4,57 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>PGM SKILL GAMES MASTERSYSTEM 2016</title>
-	<link rel="stylesheet" href="css/foundation.css" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/custom.css" />
+	<link rel="stylesheet" href="css/FontAwesome/css/font-awesome.min.css" />
 
 	<script src="Javascript/Libraries/JQuery/jquery-2.1.4.min.js"></script>
-	<script src="Javascript/Libraries/OwlCarousel/owl.carousel.min.js"></script>
-	<link rel="stylesheet" href="Javascript/Libraries/OwlCarousel/assets/owl.carousel.css">
-
-	<!-- Mis en commentaire car pas utilisé pour l'instant -->
-	<link rel="stylesheet" href="font-awesome-4.4.0/css/font-awesome.min.css" />
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
-	<!-- <script src="Javascript/Foundation/vendor/modernizr.js"></script> -->
+	<script src="Javascript/Libraries/GSAP/TweenMax.min.js"></script>
+	<script src="Javascript/Animations.js"></script>
 </head>
 <body>
-	<div class="owl-carousel owl-theme">
-	  <div class="game1">Game 1</div>
-	  <div class="game2">Game 2</div>
-	  <div class="game3">Game 3</div>
-	  <div class="game4">Game 4</div>
-	</div>
-
-	<div id="menuBar" class="monMenu row">
-		<div id="rond1" class="rond"></div>
-		<div id="rond2" class="rond">
-			<div id="connexionPan">
-				<label for="identifiant">Identifiant : </label>
-				<input id="identifiant" type="text">
-				<label for="password">Mot de passe : </label>
-				<input id="password" type="password">
+	<div id="header">
+		<div id="header-center">
+			<a href="index.html" title="Home">
+				<img id="logo" src="Images/dessin.svg" alt="Logo">
+			</a>
+			<div id="game_dropdown" class="drop" title="Show games">
+				<i id="game_drop_ico" class="fa fa-gamepad"></i>
+				<div id="show_games" class="arrow-down"></div>
+			</div>
+			<div id="header-menu">
+				<ul id="menu">
+					<li><a href="meilleurs-scores" title="Scores"><i class="fa fa-star-half-o"></i></a></li>
+					<li><a href="achievements" title="Achievements"><i class="fa fa-trophy"></i></a></li>
+					<li><i class="fa fa-user" title="Connect"></i></li>
+				</ul>
 			</div>
 		</div>
-		<div class = "rond" id="butConnexion" onclick="setConnexionPan()"><img src="images/login.svg" alt="login"></div>
-		<div id="rond3" class="rond"></div>
-		
 	</div>
-	<div class="mainPan row">
-		<div class="row">
+	<div id="games" class="drop">
+		<div id="games_grid">
+			<div class="game">
+				<a href="Snake">
+					<img class="game_img" src="images/Snake.jpg" alt="Snake">
+				</a>
+			</div>
+			<div class="game">
+				<a href="Space-invaders">
+					<img class="game_img" src="images/SpaceInvaders.jpg" alt="Space invaders">
+				</a>
+			</div>
+			<div class="game">
+				<a href="Jeux3">
+					<img class="game_img" src="images/game3.jpg" alt="game3">
+				</a>
+			</div>
+			<div class="game">
+				<a href="Jeux4">
+					<img class="game_img" src="images/game4.jpg" alt="game4">
+				</a>
+			</div>
 		</div>
 	</div>
-
-
 </body>
 <script src="Javascript/Main_UI.js"></script>
 
