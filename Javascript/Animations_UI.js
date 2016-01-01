@@ -52,7 +52,7 @@ function animationDropOut(i) {
         TweenMax.to($(".game"), 0.25, {
             marginTop: "-120px"
         });
-        TweenMax.to($("#games"), 0.4, {marginTop:"-200px"});
+        TweenMax.to($("#games"), 0.4, {marginTop:"-380px"});
     }
 }
 
