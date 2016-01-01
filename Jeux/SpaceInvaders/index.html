@@ -1,26 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Test</title>
-	<link rel="stylesheet" href="style.css">
+<!doctype html>
 
-</head>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Snake - Master Systems 2016</title>
+    <meta name="description" content="Space Invaders - Master Systems 2016">
+    <meta name="author" content="Bounty">
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="../../Css/main.css">
+    <link rel="stylesheet" href="../../Css/FontAwesome/css/font-awesome.min.css">
+
+    <script src="../../Javascript/Libraries/JQuery/jquery-2.1.4.min.js" type="text/javascript" ></script>
+    <script src="../../Javascript/Libraries/GSAP/TweenMax.min.js" type="text/javascript" ></script>
 <body onkeyup="displayunicode(event);">
-	<div id="game"></div>
+    <div id="header">
+        <div id="header-center">
+            <a href="../.." title="Home">
+                <img id="logo" src="../../Images/dessin.svg" alt="Logo">
+            </a>
+            <div id="game_dropdown" class="drop" title="Show games">
+                <i id="game_drop_ico" class="fa fa-gamepad"></i>
+                <div id="show_games" class="arrow-down"></div>
+            </div>
+            <div id="header-menu">
+                <ul id="menu">
+                    <li><a href="meilleurs-scores" title="Scores"><i class="fa fa-star-half-o"></i></a></li>
+                    <li><a href="achievements" title="Achievements"><i class="fa fa-trophy"></i></a></li>
+                    <li><i class="fa fa-user" title="Connect"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="games" class="drop">
+        <div id="games_grid">
+            <div class="game">
+                <a href="../Snake">
+                    <img class="game_img" src="../../images/Snake.jpg" alt="Snake">
+                </a>
+            </div>
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/SpaceInvaders.jpg" alt="Space invaders">
+                </a>
+            </div>
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/game3.jpg" alt="game3">
+                </a>
+            </div>
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/game4.jpg" alt="game4">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="../../Javascript/Animations_UI.js"></script>
+    <script src="../../Javascript/Main_UI.js"></script>
+
+    <!-- CHANGER L'ID --><div id="game"></div>
+
+    <script src="Javascript/Point.js"></script>
+    <script src="Javascript/Etoile.js"></script>
+    <script src="Javascript/Rectangle.js"></script>
+    <script src="Javascript/animation.js"></script>
+    <script src="Javascript/Enemy.js"></script>
+    <script src="Javascript/Enemies.js"></script>
+    <script src="Javascript/control.js"></script>
+    <script src="Javascript/control.js"></script>
+    <script src="Javascript/Bullet.js"></script>
+    <script src="Javascript/sprite.js"></script>
+    <script src="Javascript/Bullet.js"></script>
+    <script src="Javascript/Collision.js"></script>
+    <script src="Javascript/Game.js"></script>
+    <script src="Javascript/testGame.js"></script>
 </body>
-<script src="Point.js"></script>
-<script src="Etoile.js"></script>
-<script src="Rectangle.js"></script>
-<script src="animation.js"></script>
-<script src="Enemy.js"></script>
-<script src="Enemies.js"></script>
-<script src="control.js"></script>
-<script src="control.js"></script>
-<script src="Bullet.js"></script>
-<script src="sprite.js"></script>
-<script src="Bullet.js"></script>
-<script src="Collision.js"></script>
-<script src="Game.js"></script>
-<script src="testGame.js"></script>
 </html>

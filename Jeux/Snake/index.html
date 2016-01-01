@@ -6,7 +6,8 @@
 	<title>Snake - Master Systems 2016</title>
 	<meta name="description" content="Snake - Master Systems 2016">
 	<meta name="author" content="Bounty">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="Css/style.css">
+	<link rel="stylesheet" href="../../Css/main.css">
 	<link rel="stylesheet" href="../../Javascript/Libraries/JQueryUI/jquery-ui.min.css">
 	<link rel="stylesheet" href="../../Css/FontAwesome/css/font-awesome.min.css">
 
@@ -14,15 +15,54 @@
 	<script src="../../Javascript/Libraries/JQueryUI/jquery-ui.min.js" type="text/javascript" ></script>
 	<script src="../../Javascript/Libraries/EaselJS/easeljs-0.8.1.min.js" type="text/javascript" ></script>
 	<script src="../../Javascript/Libraries/PreloadJS/preloadjs-0.6.1.min.js" type="text/javascript" ></script>
-	<script src="../../Javascript/Libraries/OwlCarousel/owl.carousel.min.js" type="text/javascript" ></script>
 	<script src="../../Javascript/Libraries/GSAP/TweenMax.min.js" type="text/javascript" ></script>
 </head>
 
 <body>
-	<div id="menu_lateral" class="arrow-right">
-		<p>test text</p>
-		<p>test text</p>
-	</div>
+    <div id="header">
+        <div id="header-center">
+            <a href="../.." title="Home">
+                <img id="logo" src="../../Images/dessin.svg" alt="Logo">
+            </a>
+            <div id="game_dropdown" class="drop" title="Show games">
+                <i id="game_drop_ico" class="fa fa-gamepad"></i>
+                <div id="show_games" class="arrow-down"></div>
+            </div>
+            <div id="header-menu">
+                <ul id="menu">
+                    <li><a href="meilleurs-scores" title="Scores"><i class="fa fa-star-half-o"></i></a></li>
+                    <li><a href="achievements" title="Achievements"><i class="fa fa-trophy"></i></a></li>
+                    <li><i class="fa fa-user" title="Connect"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="games" class="drop">
+        <div id="games_grid">
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/Snake.jpg" alt="Snake">
+                </a>
+            </div>
+            <div class="game">
+                <a href="../SpaceInvaders">
+                    <img class="game_img" src="../../images/SpaceInvaders.jpg" alt="Space invaders">
+                </a>
+            </div>
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/game3.jpg" alt="game3">
+                </a>
+            </div>
+            <div class="game">
+                <a href=".">
+                    <img class="game_img" src="../../images/game4.jpg" alt="game4">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="../../Javascript/Animations_UI.js"></script>
+    <script src="../../Javascript/Main_UI.js"></script>
 	<canvas id="snake_canvas">Canvas not supported.</canvas>
 	<div class="slider" id="progressSlider"></div>
 	<button id="playBtn">Replay</button>
@@ -32,7 +72,7 @@
 	<script src="Javascript/KeyDirections.js"></script>
 	<script src="Javascript/Animations.js"></script>
 	<script src="Javascript/Replay.js"></script>
+	<script src="Javascript/SnakeGame.js"></script>
 	<script src="Javascript/SnakeV3.js"></script>
-	<!-- <script src="Javascript/ui.js"></script> -->
 </body>
 </html>

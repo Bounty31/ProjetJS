@@ -1,7 +1,6 @@
 var hover;
-var dropAnimation = 0;
+var dropAnimation = 1;
 var hoverAnimation = 0;
-
 
 
 $(document).ready(function() {
@@ -31,5 +30,4 @@ $(document).ready(function() {
         function() {
             animationHoverOut(this, hoverAnimation);
         });
-
 });
