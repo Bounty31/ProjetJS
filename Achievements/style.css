@@ -10,7 +10,7 @@
 	width:250px;
 	height: 60px;
 background:rgba(0,0,0,0.5);
-	border-radius : 200px;
+	border-radius : 3px;
 }
 #imageAchievement{
 position: absolute;
@@ -19,8 +19,12 @@ height: 50px;
 border-radius:60px;
 background: white;
 margin-top: 5px;
-margin-left: 5px
+margin-left: 5px;
+font-size:35px;
+text-align: center;
+line-height: 50px;
 }
+
 #textAchievementUnlocked{
 	position: absolute;
 	margin-left: 60px;
