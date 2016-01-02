@@ -32,13 +32,13 @@ Animation.prototype.create = function(snake, wait) {
 	}
 
 	TweenMax.staggerTo(snake.snake_array, 0.8, 
-		{alpha:1, onUpdate:function() { self.snakeGame.render(); }}, -0.1,
-		function() {
-			self.snakeGame.ready++;
-			if (self.snakeGame.ready == self.snakeGame.snakes.length) {
-				self.snakeGame.state = "playing";
-			}
-		});
+		{alpha:1, onUpdate:function() { self.snakeGame.render(); }},
+        -0.1, function() {
+            self.snakeGame.ready++;
+            if (self.snakeGame.ready == self.snakeGame.snakes.length) {
+                self.snakeGame.state = "playing";
+            }
+        });
 
 	snake.replay.getTimeline().staggerTo(snake.snake_array, 0.8,
 		{alpha:1, onUpdate:function() { self.snakeGame.render(); }}, -0.1);
@@ -49,7 +49,6 @@ Animation.prototype.move = function(snake, speed) {
 	var nextX, nextY;
 	var minTempsAnim = 0.18;
 	var border = false;
-	var tempsAnim = 0;
 
 	var total = snake.replay.getTimeline().totalDuration();
 	// console.log('---------------------');
@@ -82,7 +81,7 @@ Animation.prototype.move = function(snake, speed) {
 					x:snake.borderEffectOut[o].MOVETOX, y:snake.borderEffectOut[o].MOVETOY, 
 					scaleX:0, scaleY:0,
 					onUpdate:function() { self.snakeGame.stage.update(); },
-				roundProps:"x,y"}, total);
+					roundProps:"x,y"}, total);
 
 				animated = true;
 			}
@@ -103,16 +102,17 @@ Animation.prototype.move = function(snake, speed) {
 						scaleX:snake.size, scaleY:snake.size, alpha:1,
 						onUpdate:function() { self.snakeGame.stage.update(); }
 						, roundProps:"x,y"}, total);
-					animated = true;
 
 					snake.replay.getTimeline().set(snake.snake_array[c], {
 						x:snake.borderEffectIn[i].TPTOX, y:snake.borderEffectIn[i].TPTOY
-					});
+					}, total);
 					snake.replay.getTimeline().to(snake.snake_array[c], tempsAnim, {
 						x:snake.borderEffectIn[i].MOVETOX, y:snake.borderEffectIn[i].MOVETOY, 
 						scaleX:snake.size, scaleY:snake.size, alpha:1,
 						onUpdate:function() { self.snakeGame.stage.update(); }
 					, roundProps:"x,y"}, total);
+
+                    animated = true;
 				}
 			}
 		}
