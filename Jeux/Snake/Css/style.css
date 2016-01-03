@@ -24,9 +24,109 @@ button {
 	margin:20px 0 10px 0;
 	font-size:12px;
 	cursor:pointer;
+}
+
+.replay {
     display: none;
 }
 
-.slider {
-    display: none;
+/* Menu */
+#snake_menu {
+    background-color: rgba(40, 47, 49, 0.7);;
+    font-size: 18px;
+    font-family: Ubuntu, sans-serif;
+    color: white;
+    display: block;
+    overflow: auto;
+}
+.centered {
+    text-align: center;
+}
+.title {
+    font-size: 35px;
+    padding-top: 10px;
+}
+.size {
+    line-height: 45px;
+}
+.part {
+    display: block;
+    float: left;
+    width: 50%;
+    font-size: 22px;
+}
+.first-part {
+    text-align: right;
+    padding-right: 10px;
+    line-height: 50px;
+}
+.part2 {
+    display: block;
+    float: left;
+    width: 50%;
+    font-size: 20px;
+}
+.first-part2 {
+    text-align: right;
+    padding-right: 10px;
+    line-height: 40px;
+}
+.ligne {
+    width:100%;
+    height: 50px;
+    height: 60px;
+}
+.ligne-color {
+    height: 170px;
+}
+.ligne1, .ligne2, .ligne3, .ligne4 {
+    display: block;
+    overflow: auto;
+}
+.menu_button {
+    margin: 0 5px;
+    padding: 15px 20px;
+    font-size: 19px;
+}
+
+.menu_button {
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 22px;
+    background: #3498db;
+    box-shadow: 0 0px 15px #338CC7;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+}
+.menu_button:hover {
+    background: #25a8fa;
+    text-decoration: none;
+}
+
+.color1 {
+    background-color: #ec1c24;
+}
+.color2 {
+    background-color: #00a1e7;
+}
+.color3 {
+    background-color: #22b04c;
+}
+.color4 {
+    background-color: #a249a3;
+}
+.menu_button_color {
+    text-decoration: none;
+    margin: 0;
+    border: 2px solid rgb(97, 100, 101);
+}
+.menu_button_color:hover {
+    border: 2px solid #C7C7C7;
+}
+
+.inputs {
+    color: white;
+    background-color: #636868;
+    font-size: 18px;
 }

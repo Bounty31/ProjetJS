@@ -1,5 +1,5 @@
 var queue;
-var themes = ["rouge", "bleu", "vert"];
+var themes = ["rouge", "bleu", "vert", "violet"];
 
 for (var i = 0; i < themes.length; i++) {
     themes[i] = "images/" + themes[i] + ".png";
@@ -33,12 +33,12 @@ function gameStart() {
 		themeImages.push(queue.getResult(themes[i]));
 	}
 
-	var snake_game = new SnakeGame(30, 15, 2, 200, false); //Creation du terrain de jeu
+	var snake_game = new SnakeGame(30, 15, 2, 250, false); //Creation du terrain de jeu
 
-	var joueur1 = new Snake("Abrakadabra", 10, "x", 20, 0, "directionnal_keys"); // Creation du joueur
+	var joueur1 = new Snake("Abrakadabra", 15, "x", 10, 0, "directionnal_keys"); // Creation du joueur
 	var joueur2 = new Snake("Jean Mi du 13", 10, "x", 0, 5, "zqsd_keys"); // Creation du joueur
 	var joueur3 = new Snake("Dylan la kalash", 14, "x", 3, 10, "directionnal_keys"); // Creation du joueur
-	joueur1.create(themeImages[2], snake_game, true);
+	joueur1.create(themeImages[3], snake_game, true);
 	//joueur2.create(themeImages[1], snake_game, true);
 	//joueur3.create(themeImages[0], snake_game, true);
 

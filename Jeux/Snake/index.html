@@ -2,78 +2,185 @@
 
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<title>Snake - Master Systems 2016</title>
-	<meta name="description" content="Snake - Master Systems 2016">
-	<meta name="author" content="Bounty">
-	<link rel="stylesheet" href="Css/style.css">
-	<link rel="stylesheet" href="../../Css/main.css">
-	<link rel="stylesheet" href="../../Javascript/Libraries/JQueryUI/jquery-ui.min.css">
-	<link rel="stylesheet" href="../../Css/FontAwesome/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <title>Snake - Master Systems 2016</title>
+    <meta name="description" content="Snake - Master Systems 2016">
+    <meta name="author" content="Bounty">
+    <link rel="stylesheet" type="text/css"
+          href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="../../Css/main.css">
+    <link rel="stylesheet" href="../../Javascript/Libraries/JQueryUI/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../Css/FontAwesome/css/font-awesome.min.css">
 
-	<script src="../../Javascript/Libraries/JQuery/jquery-2.1.4.min.js" type="text/javascript" ></script>
-	<script src="../../Javascript/Libraries/JQueryUI/jquery-ui.min.js" type="text/javascript" ></script>
-	<script src="../../Javascript/Libraries/EaselJS/easeljs-0.8.1.min.js" type="text/javascript" ></script>
-	<script src="../../Javascript/Libraries/PreloadJS/preloadjs-0.6.1.min.js" type="text/javascript" ></script>
-	<script src="../../Javascript/Libraries/GSAP/TweenMax.min.js" type="text/javascript" ></script>
+    <script src="../../Javascript/Libraries/JQuery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="../../Javascript/Libraries/JQueryUI/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="../../Javascript/Libraries/EaselJS/easeljs-0.8.1.min.js" type="text/javascript"></script>
+    <script src="../../Javascript/Libraries/PreloadJS/preloadjs-0.6.1.min.js" type="text/javascript"></script>
+    <script src="../../Javascript/Libraries/GSAP/TweenMax.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <div id="header">
-        <div id="header-center">
-            <a href="../.." title="Home">
-                <img id="logo" src="../../Images/dessin.svg" alt="Logo">
+<div id="header">
+    <div id="header-center">
+        <a href="../.." title="Home">
+            <img id="logo" src="../../Images/dessin.svg" alt="Logo">
+        </a>
+        <div id="game_dropdown" class="drop" title="Show games">
+            <i id="game_drop_ico" class="fa fa-gamepad"></i>
+            <div id="show_games" class="arrow-down"></div>
+        </div>
+        <div id="header-menu">
+            <ul id="menu">
+                <li><a href="meilleurs-scores" title="Scores"><i class="fa fa-star-half-o"></i></a></li>
+                <li><a href="achievements" title="Achievements"><i class="fa fa-trophy"></i></a></li>
+                <li><i class="fa fa-user" title="Connect"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="games" class="drop">
+    <div id="games_grid">
+        <div class="game">
+            <a href=".">
+                <img class="game_img" src="../../images/Snake.jpg" alt="Snake">
             </a>
-            <div id="game_dropdown" class="drop" title="Show games">
-                <i id="game_drop_ico" class="fa fa-gamepad"></i>
-                <div id="show_games" class="arrow-down"></div>
-            </div>
-            <div id="header-menu">
-                <ul id="menu">
-                    <li><a href="meilleurs-scores" title="Scores"><i class="fa fa-star-half-o"></i></a></li>
-                    <li><a href="achievements" title="Achievements"><i class="fa fa-trophy"></i></a></li>
-                    <li><i class="fa fa-user" title="Connect"></i></li>
-                </ul>
-            </div>
+        </div>
+        <div class="game">
+            <a href="../SpaceInvaders">
+                <img class="game_img" src="../../images/SpaceInvaders.jpg" alt="Space invaders">
+            </a>
+        </div>
+        <div class="game">
+            <a href=".">
+                <img class="game_img" src="../../images/game3.jpg" alt="game3">
+            </a>
+        </div>
+        <div class="game">
+            <a href=".">
+                <img class="game_img" src="../../images/game4.jpg" alt="game4">
+            </a>
         </div>
     </div>
-    <div id="games" class="drop">
-        <div id="games_grid">
-            <div class="game">
-                <a href=".">
-                    <img class="game_img" src="../../images/Snake.jpg" alt="Snake">
-                </a>
-            </div>
-            <div class="game">
-                <a href="../SpaceInvaders">
-                    <img class="game_img" src="../../images/SpaceInvaders.jpg" alt="Space invaders">
-                </a>
-            </div>
-            <div class="game">
-                <a href=".">
-                    <img class="game_img" src="../../images/game3.jpg" alt="game3">
-                </a>
-            </div>
-            <div class="game">
-                <a href=".">
-                    <img class="game_img" src="../../images/game4.jpg" alt="game4">
-                </a>
-            </div>
-        </div>
-    </div>
-    <script src="../../Javascript/Animations_UI.js"></script>
-    <script src="../../Javascript/Main_UI.js"></script>
-	<canvas id="snake_canvas">Canvas not supported.</canvas>
-	<div class="slider" id="progressSlider"></div>
-	<button id="playBtn">Replay</button>
-	<button id="pauseBtn">Pause</button>
-	<button id="reverseBtn">Reverse</button>
+</div>
+<script src="../../Javascript/Animations_UI.js"></script>
+<script src="../../Javascript/Main_UI.js"></script>
+<canvas id="snake_canvas">Canvas not supported.</canvas>
 
-	<script src="Javascript/KeyDirections.js"></script>
-	<script src="Javascript/Animations.js"></script>
-	<script src="Javascript/Replay.js"></script>
-	<script src="Javascript/SnakeGame.js"></script>
-	<script src="Javascript/Snake.js"></script>
-	<script src="Javascript/SnakeV3.js"></script>
+<div id="snake_menu">
+    <h1 class="centered title">Snake</h1>
+    <div class="ligne">
+        <div class="part first-part">Joueurs :</div>
+        <div class="part second-part">
+            <button type="button" class="menu_button">1</button>
+            <button type="button" class="menu_button">2</button>
+            <button type="button" class="menu_button">3</button>
+            <button type="button" class="menu_button">4</button>
+        </div>
+    </div>
+
+    <div class="ligne ligne-color">
+        <div class="part first-part">Couleurs :</div>
+        <div class="part second-part">
+            <div class="ligne1">
+                <div class="part2 first-part2">
+                    <div>Joueur 1 :</div>
+                </div>
+                <div class="part2 second-part2">
+                    <button type="button" class="menu_button_color color1"></button>
+                    <button type="button" class="menu_button_color color2"></button>
+                    <button type="button" class="menu_button_color color3"></button>
+                    <button type="button" class="menu_button_color color4"></button>
+                </div>
+            </div>
+
+            <div class="ligne2">
+                <div class="part2 first-part2">
+                    <div>Joueur 2 :</div>
+                </div>
+                <div class="part2 second-part2">
+                    <button type="button" class="menu_button_color color1"></button>
+                    <button type="button" class="menu_button_color color2"></button>
+                    <button type="button" class="menu_button_color color3"></button>
+                    <button type="button" class="menu_button_color color4"></button>
+                </div>
+            </div>
+
+            <div class="ligne3">
+                <div class="part2 first-part2">
+                    <div>Joueur 3 :</div>
+                </div>
+                <div class="part2 second-part2">
+                    <button type="button" class="menu_button_color color1"></button>
+                    <button type="button" class="menu_button_color color2"></button>
+                    <button type="button" class="menu_button_color color3"></button>
+                    <button type="button" class="menu_button_color color4"></button>
+                </div>
+            </div>
+
+            <div class="ligne4">
+                <div class="part2 first-part2">
+                    <div>Joueur 4 :</div>
+                </div>
+                <div class="part2 second-part2">
+                    <button type="button" class="menu_button_color color1"></button>
+                    <button type="button" class="menu_button_color color2"></button>
+                    <button type="button" class="menu_button_color color3"></button>
+                    <button type="button" class="menu_button_color color4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ligne">
+        <div class="part first-part">Temps :</div>
+        <div class="part second-part">
+            <button type="button" class="menu_button">∞</button>
+            <button type="button" class="menu_button">45s</button>
+            <button type="button" class="menu_button">2min</button>
+            <button type="button" class="menu_button">5min</button>
+        </div>
+    </div>
+
+    <div class="ligne">
+        <div class="part first-part">Bords :</div>
+        <div class="part second-part">
+            <button type="button" class="menu_button">Activer</button>
+            <button type="button" class="menu_button">Désactiver</button>
+        </div>
+    </div>
+
+    <div class="ligne">
+        <div class="part first-part">Taille :</div>
+        <div class="part second-part size">
+            <input class="inputs" type="number" size="2" value="30" min="20" max="40" name="width">
+            x
+            <input class="inputs" type="number" size="2" value="15" min="20" max="40" name="height">
+        </div>
+    </div>
+
+    <div class="ligne">
+        <div class="part first-part">Objectifs :</div>
+        <div class="part second-part size">
+            Gagner le plus de points!
+        </div>
+    </div>
+
+    <div class="ligne centered">
+        <button type="button" class="menu_button">Jouer</button>
+    </div>
+</div>
+
+<div class="slider replay" id="progressSlider"></div>
+<button id="playBtn" class="replay">Replay</button>
+<button id="pauseBtn" class="replay">Pause</button>
+<button id="reverseBtn" class="replay">Reverse</button>
+
+<script src="Javascript/KeyDirections.js"></script>
+<script src="Javascript/Animations.js"></script>
+<script src="Javascript/Replay.js"></script>
+<script src="Javascript/SnakeGame.js"></script>
+<script src="Javascript/Snake.js"></script>
+<script src="Javascript/States.js"></script>
 </body>
 </html>

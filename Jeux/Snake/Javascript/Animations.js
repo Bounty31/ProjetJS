@@ -101,7 +101,7 @@ Animation.prototype.move = function(snake, speed) {
 						x:snake.borderEffectIn[i].MOVETOX, y:snake.borderEffectIn[i].MOVETOY, 
 						scaleX:snake.size, scaleY:snake.size, alpha:1,
 						onUpdate:function() { self.snakeGame.stage.update(); }
-						, roundProps:"x,y"}, total);
+						, roundProps:"x,y"});
 
 					snake.replay.getTimeline().set(snake.snake_array[c], {
 						x:snake.borderEffectIn[i].TPTOX, y:snake.borderEffectIn[i].TPTOY
