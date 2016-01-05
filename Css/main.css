@@ -106,7 +106,6 @@ i {
 .game img {
     width: 280px;
     border: 1px solid rgba(249, 144, 37, 0.3);
-    -webkit-filter: grayscale(40%);
 }
 
 
@@ -147,4 +146,17 @@ button {
     margin:20px 0 10px 0;
     font-size:12px;
     cursor:pointer;
+}
+
+.game_img {
+    -webkit-filter: grayscale(60%);
+    -moz-filter: grayscale(60%);
+    -o-filter: grayscale(60%);
+    filter: grayscale(60%);
+}
+.game_img:hover {
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -o-filter: grayscale(0%);
+    filter: grayscale(0%);
 }

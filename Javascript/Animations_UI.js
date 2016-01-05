@@ -59,8 +59,7 @@ function animationDropOut(i) {
 function animationHoverIn(element, i) {
     if (i == 0) {
         TweenMax.to(element, 0.22, {css: {
-            borderColor: "rgba(249,144,37,0.7)",
-            webkitFilter: "grayscale(0%)"
+            borderColor: "rgba(249,144,37,0.7)"
         }});
     }
     else if (i == 1) {
@@ -70,8 +69,7 @@ function animationHoverIn(element, i) {
 function animationHoverOut(element, i) {
     if (i == 0) {
         TweenMax.to(element, 0.22, {css: {
-            borderColor: "rgba(249,144,37,0.3)",
-            webkitFilter: "grayscale(40%)"
+            borderColor: "rgba(249,144,37,0.3)"
         }});
     }
     else if (i == 1) {
