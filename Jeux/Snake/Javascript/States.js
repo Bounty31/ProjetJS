@@ -75,7 +75,7 @@ function gameStart() {
 	});
 }
 
-startLoading();
+//startLoading();
 
 
 

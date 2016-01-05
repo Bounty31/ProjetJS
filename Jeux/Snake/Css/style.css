@@ -36,15 +36,19 @@ button {
     font-size: 18px;
     font-family: Ubuntu, sans-serif;
     color: white;
-    display: block;
+    position: absolute;
     overflow: auto;
+    width: 100%;
+    margin: 0 auto;
+    height: 635px;
+    top: 50px;
 }
 .centered {
     text-align: center;
 }
 .title {
     font-size: 35px;
-    padding-top: 10px;
+    padding-top: 0px;
 }
 .size {
     line-height: 45px;
@@ -63,7 +67,6 @@ button {
 .part2 {
     display: block;
     float: left;
-    width: 50%;
     font-size: 20px;
 }
 .first-part2 {
@@ -83,13 +86,16 @@ button {
     display: block;
     overflow: auto;
 }
+.ligne1 {
+    margin-top: 6px;
+}
 .menu_button {
     margin: 0 5px;
     padding: 15px 20px;
     font-size: 19px;
 }
 
-.menu_button {
+.menu_button_players, .menu_button_play, .menu_button {
     font-family: Arial;
     color: #ffffff;
     font-size: 22px;
@@ -98,10 +104,16 @@ button {
     padding: 10px 20px 10px 20px;
     text-decoration: none;
     border: none;
+    margin: 0 2px;
 }
+.menu_button_players:hover,
+.menu_button_play:hover,
 .menu_button:hover {
-    background: #25a8fa;
+    background: #25a8fa !important;
     text-decoration: none;
+}
+.selected:hover {
+    background: #FFC66E !important;
 }
 
 .color1 {
@@ -122,7 +134,7 @@ button {
     border: 2px solid rgb(97, 100, 101);
 }
 .menu_button_color:hover {
-    border: 2px solid #C7C7C7;
+    border: 2px solid #C7C7C7 !important;
 }
 
 .inputs {

@@ -72,10 +72,10 @@
     <div class="ligne">
         <div class="part first-part">Joueurs :</div>
         <div class="part second-part">
-            <button type="button" class="menu_button">1</button>
-            <button type="button" class="menu_button">2</button>
-            <button type="button" class="menu_button">3</button>
-            <button type="button" class="menu_button">4</button>
+            <button value="1" type="button" class="menu_button_players default">1</button>
+            <button value="2" type="button" class="menu_button_players">2</button>
+            <button value="3" type="button" class="menu_button_players">3</button>
+            <button value="4" type="button" class="menu_button_players">4</button>
         </div>
     </div>
 
@@ -87,10 +87,10 @@
                     <div>Joueur 1 :</div>
                 </div>
                 <div class="part2 second-part2">
-                    <button type="button" class="menu_button_color color1"></button>
-                    <button type="button" class="menu_button_color color2"></button>
-                    <button type="button" class="menu_button_color color3"></button>
-                    <button type="button" class="menu_button_color color4"></button>
+                    <button value="0" type="button" class="menu_button_color color1 default-color"></button>
+                    <button value="1" type="button" class="menu_button_color color2"></button>
+                    <button value="2" type="button" class="menu_button_color color3"></button>
+                    <button value="3" type="button" class="menu_button_color color4"></button>
                 </div>
             </div>
 
@@ -99,10 +99,10 @@
                     <div>Joueur 2 :</div>
                 </div>
                 <div class="part2 second-part2">
-                    <button type="button" class="menu_button_color color1"></button>
-                    <button type="button" class="menu_button_color color2"></button>
-                    <button type="button" class="menu_button_color color3"></button>
-                    <button type="button" class="menu_button_color color4"></button>
+                    <button value="0" type="button" class="menu_button_color color1"></button>
+                    <button value="1" type="button" class="menu_button_color color2 default-color"></button>
+                    <button value="2" type="button" class="menu_button_color color3"></button>
+                    <button value="3" type="button" class="menu_button_color color4"></button>
                 </div>
             </div>
 
@@ -111,10 +111,10 @@
                     <div>Joueur 3 :</div>
                 </div>
                 <div class="part2 second-part2">
-                    <button type="button" class="menu_button_color color1"></button>
-                    <button type="button" class="menu_button_color color2"></button>
-                    <button type="button" class="menu_button_color color3"></button>
-                    <button type="button" class="menu_button_color color4"></button>
+                    <button value="0" type="button" class="menu_button_color color1"></button>
+                    <button value="1" type="button" class="menu_button_color color2"></button>
+                    <button value="2" type="button" class="menu_button_color color3 default-color"></button>
+                    <button value="3" type="button" class="menu_button_color color4"></button>
                 </div>
             </div>
 
@@ -123,10 +123,10 @@
                     <div>Joueur 4 :</div>
                 </div>
                 <div class="part2 second-part2">
-                    <button type="button" class="menu_button_color color1"></button>
-                    <button type="button" class="menu_button_color color2"></button>
-                    <button type="button" class="menu_button_color color3"></button>
-                    <button type="button" class="menu_button_color color4"></button>
+                    <button value="0" type="button" class="menu_button_color color1"></button>
+                    <button value="1" type="button" class="menu_button_color color2"></button>
+                    <button value="2" type="button" class="menu_button_color color3"></button>
+                    <button value="3" type="button" class="menu_button_color color4 default-color"></button>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
     </div>
 
     <div class="ligne centered">
-        <button type="button" class="menu_button">Jouer</button>
+        <button type="button" class="menu_button_play">Jouer</button>
     </div>
 </div>
 
@@ -176,6 +176,7 @@
 <button id="pauseBtn" class="replay">Pause</button>
 <button id="reverseBtn" class="replay">Reverse</button>
 
+<script src="Javascript/UI.js"></script>
 <script src="Javascript/KeyDirections.js"></script>
 <script src="Javascript/Animations.js"></script>
 <script src="Javascript/Replay.js"></script>
