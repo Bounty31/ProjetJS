@@ -2,7 +2,7 @@ function Animation(snakeGame) {
 	this.snakeGame = snakeGame;
 }
 
-Animation.prototype.create = function(snake, wait) {
+Animation.prototype.create = function(snake) {
 	var self = this;
 	var tempX, tempY;
 
@@ -43,15 +43,43 @@ Animation.prototype.create = function(snake, wait) {
 	snake.replay.getTimeline().staggerTo(snake.snake_array, 0.8,
 		{alpha:1, onUpdate:function() { self.snakeGame.render(); }}, -0.1);
 }
+Animation.prototype.grow = function(snake) {
+	var self = this;
+    snake.length += 1;
 
+    TweenLite.set(snake.snake_array[0], {
+        x:20, y:20,
+        scaleX:snake.size, scaleY:snake.size,
+        regX:snake.themeImage.width/2, regY:snake.themeImage.height/2,
+        alpha:1
+    });
+    console.log(snake.snake_array[0]);
+    console.log(snake.snake_array[1]);
+
+    //TweenLite.fromTo(snake.snake_array[0], 0.2, {
+		//alpha:0,
+    //    scaleX:snake.size, scaleY:snake.size,
+    //    x:snake.snake_array[1].x,
+    //    y:snake.snake_array[1].y,
+    //    regX:snake.themeImage.width/2,
+    //    regY:snake.themeImage.height/2
+    //}, {
+    //    onUpdate:function() { self.snakeGame.render(); },
+    //    alpha:1,
+    //    scaleX:snake.size, scaleY:snake.size,
+    //    x:20,
+    //    y:20,
+    //    regX:snake.themeImage.width/2,
+    //    regY:snake.themeImage.height/2
+    //});
+
+}
 Animation.prototype.move = function(snake, speed) {
 	var self = this;
 	var nextX, nextY;
 	var minTempsAnim = 0.18;
-	var border = false;
 
 	var total = snake.replay.getTimeline().totalDuration();
-	// console.log('---------------------');
 
 	for (var c = snake.snake_array.length - 1; c >= 0 ; c--) {
 		if (c == snake.snake_array.length - 1) {
@@ -71,13 +99,13 @@ Animation.prototype.move = function(snake, speed) {
 			if (c == snake.borderEffectOut[o].INDEX) {
 				// console.log("Out index : " + c);
 
-				TweenLite.to(snake.snake_array[c], tempsAnim, {
+				TweenLite.to(snake.snake_array[c], 0.2, {
 					x:snake.borderEffectOut[o].MOVETOX, y:snake.borderEffectOut[o].MOVETOY, 
 					scaleX:0, scaleY:0, alpha:0,
 					onUpdate:function() { self.snakeGame.stage.update(); },
 					roundProps:"x,y"}, total);
 
-				snake.replay.getTimeline().to(snake.snake_array[c], tempsAnim, {
+				snake.replay.getTimeline().to(snake.snake_array[c], 0.2, {
 					x:snake.borderEffectOut[o].MOVETOX, y:snake.borderEffectOut[o].MOVETOY, 
 					scaleX:0, scaleY:0,
 					onUpdate:function() { self.snakeGame.stage.update(); },
@@ -91,13 +119,13 @@ Animation.prototype.move = function(snake, speed) {
 		if (!animated) {
 			for (var i = 0; i < snake.borderEffectIn.length; i++) {
 				if (c == snake.borderEffectIn[i].INDEX) {
-					console.log("In index : " + c);
+					//console.log("In index : " + c);
 
 					TweenLite.set(snake.snake_array[c], {
 						x:snake.borderEffectIn[i].TPTOX, y:snake.borderEffectIn[i].TPTOY
 					});
 
-					TweenLite.to(snake.snake_array[c], tempsAnim, {
+					TweenLite.to(snake.snake_array[c], 0.2, {
 						x:snake.borderEffectIn[i].MOVETOX, y:snake.borderEffectIn[i].MOVETOY, 
 						scaleX:snake.size, scaleY:snake.size, alpha:1,
 						onUpdate:function() { self.snakeGame.stage.update(); }
@@ -106,7 +134,7 @@ Animation.prototype.move = function(snake, speed) {
 					snake.replay.getTimeline().set(snake.snake_array[c], {
 						x:snake.borderEffectIn[i].TPTOX, y:snake.borderEffectIn[i].TPTOY
 					}, total);
-					snake.replay.getTimeline().to(snake.snake_array[c], tempsAnim, {
+					snake.replay.getTimeline().to(snake.snake_array[c], 0.2, {
 						x:snake.borderEffectIn[i].MOVETOX, y:snake.borderEffectIn[i].MOVETOY, 
 						scaleX:snake.size, scaleY:snake.size, alpha:1,
 						onUpdate:function() { self.snakeGame.stage.update(); }
@@ -164,12 +192,28 @@ Animation.prototype.die = function(snake, animType) {
 		snake.replay.getTimeline().staggerTo(snake.snake_array, 1, {alpha:0, onUpdate:function() { self.snakeGame.render(); }}, 0.08);
 	}
 	else if (animType == "border") {
-		TweenMax.staggerTo(snake.snake_array, 0.5, 
+		TweenMax.staggerTo(snake.snake_array, 0.5,
 			{scaleX:snake.size*2, scaleY:snake.size*2, alpha:0, onUpdate:function() { self.snakeGame.render(); },
 			onComplete:function() { snake.showReplay = true; }}, -0.08);
 
-		snake.replay.getTimeline().staggerTo(snake.snake_array, 0.5, 
+		snake.replay.getTimeline().staggerTo(snake.snake_array, 0.5,
 			{scaleX:snake.size*2, scaleY:snake.size*2, alpha:0, onUpdate:function() { self.snakeGame.render(); }}, -0.08);
+	}
+	else if (animType == "s_collision") {
+        TweenMax.staggerTo(snake.snake_array, 2.5,
+            {x:"+="+(-snake.f_x), y:"+="+(-snake.f_y),
+                scaleX:0, scaleY:0,
+                alpha:0, onUpdate:function() { self.snakeGame.render(); },
+                onComplete:function() { snake.showReplay = true; }}, -0.15);
+
+        snake.replay.getTimeline().staggerTo(snake.snake_array, 2.5,
+            {x:"+="+(-snake.f_x), y:"+="+(-snake.f_y),
+                scaleX:0, scaleY:0,
+                alpha:0, onUpdate:function() { self.snakeGame.render(); }}, -0.15);
+    }
+	else if (animType == "destroyed") {
+		TweenMax.to(snake.snake_array, 0.7,
+			{scaleX:0, scaleY:0, alpha:0, onUpdate:function() { self.snakeGame.render(); }});
 	}
 }
 

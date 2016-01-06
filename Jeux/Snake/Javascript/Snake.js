@@ -19,6 +19,7 @@ function Snake(name, init_length, init_direction, x_offset, y_offset, control_ke
     this.dead = false;
     this.showReplay = false;
     this.themeImage = null;
+    this.score = 0;
 }
 Snake.prototype.create = function(themeImage, snakeGame, debug) {
     this.size = snakeGame.size;
@@ -34,7 +35,17 @@ Snake.prototype.create = function(themeImage, snakeGame, debug) {
     this.animation.create(this);
 
     if (debug) {
-        console.log("Created : " + this.name);
+        console.log("+ Created : " + this.name);
+    }
+}
+Snake.prototype.grow = function(snakeGame, debug) {
+    this.snake_array.unshift(new createjs.Bitmap(this.themeImage));
+    snakeGame.stage.addChild(this.snake_array[0]);
+
+    this.animation.grow(this);
+
+    if (debug) {
+        console.log("+ Grow : " + this.name);
     }
 }
 Snake.prototype.update = function() {
@@ -46,6 +57,12 @@ Snake.prototype.update = function() {
     }
     else if (this.control_keys == "zqsd_keys") {
         key_codes = 1;
+    }
+    else if (this.control_keys == "uhjk_keys") {
+        key_codes = 2;
+    }
+    else if (this.control_keys == "5123_keys") {
+        key_codes = 3;
     }
 
     if (key_names[key_codes] == "s_right") {
@@ -66,34 +83,61 @@ Snake.prototype.animate = function(stage, speed) {
     if (!this.dead) {
         this.animation.move(this, speed);
     }
-
-    // , ease:Elastic.easeInOut.config(1, 1) bezier:{type:"soft", values:[{scaleX:1, scaleY:1}, {scaleX:0.5, scaleY:0.5}, {scaleX:1, scaleY:1}], autoRotate:true}
-    // bezier:{type:"soft", values:[{alpha:1}, {alpha:0}, {alpha:1}], autoRotate:true},
 }
 Snake.prototype.selfCollision = function(snakeGame) {
     var oneTime = false;
 
-    if (!this.dead) {
-        for (var i = this.snake_array.length - 2; i >= 0 ; i--) {
-            if (this.frontCell.x + this.f_x == this.snake_array[i].x && this.frontCell.y + this.f_y == this.snake_array[i].y
-                && !oneTime) {
-                this.die(snakeGame, "self1", true);
-                oneTime = true;
+    for (var i = this.snake_array.length - 2; i >= 0 ; i--) {
+        if (this.frontCell.x + this.f_x == this.snake_array[i].x && this.frontCell.y + this.f_y == this.snake_array[i].y
+            && !oneTime) {
+            this.die(snakeGame, "self1", true);
+            oneTime = true;
+        }
+    }
+}
+Snake.prototype.snakesCollision = function(snakeGame, index) {
+    var collision = false;
+    var collision_index = null;
+
+    for (var i = 0; i < snakeGame.snakes.length ; i++) {
+        if (i != index && !collision) {
+            for (var j = snakeGame.snakes[i].snake_array.length - 1; j > 0 ; j--) {
+                if (j == snakeGame.snakes[i].snake_array.length - 1) {
+                    if (this.frontCell.x + this.f_x == snakeGame.snakes[i].snake_array[j].x + snakeGame.snakes[i].f_x
+                        && this.frontCell.y + this.f_y == snakeGame.snakes[i].snake_array[j].y + snakeGame.snakes[i].f_y) {
+                        collision = true;
+                        collision_index = i;
+                    }
+                }
+                else {
+                    if (this.frontCell.x + this.f_x == snakeGame.snakes[i].snake_array[j].x
+                        && this.frontCell.y + this.f_y == snakeGame.snakes[i].snake_array[j].y) {
+                        collision = true;
+                        collision_index = i;
+                    }
+                }
             }
         }
+    }
+
+    if (collision && !snakeGame.snakes[collision_index].dead) {
+        console.log("- " + this.name + " died (collision) " + snakeGame.snakes[collision_index].name);
+        this.die(snakeGame, "s_collision", true);
     }
 }
 Snake.prototype.die = function(snakeGame, animation, debug) {
     this.animation.die(this, animation);
-
     this.dead = true;
 
     if (debug) {
         if (animation == "self1") {
-            console.log("Died (self collision) : " + this.name);
+            console.log("- Died (self collision) : " + this.name);
         }
         else if (animation == "border") {
-            console.log("Died (border collision) : " + this.name);
+            console.log("- Died (border collision) : " + this.name);
+        }
+        else if (animation == "destroyed") {
+            console.log("- Died (destroyed) : " + this.name);
         }
     }
 }

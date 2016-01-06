@@ -17,6 +17,7 @@ html, body {
 .slider {
 	width:750px;
 	margin:20px auto;
+    z-index: 0;
 }
 
 button {
@@ -32,7 +33,7 @@ button {
 
 /* Menu */
 #snake_menu {
-    background-color: rgba(40, 47, 49, 0.7);;
+    background-color: rgba(40, 47, 49, 0.8);;
     font-size: 18px;
     font-family: Ubuntu, sans-serif;
     color: white;
@@ -42,6 +43,7 @@ button {
     margin: 0 auto;
     height: 635px;
     top: 50px;
+    z-index: 10;
 }
 .centered {
     text-align: center;
@@ -141,4 +143,12 @@ button {
     color: white;
     background-color: #636868;
     font-size: 18px;
+}
+
+.players-inputs {
+    width: 120px;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    padding: 5px;
 }

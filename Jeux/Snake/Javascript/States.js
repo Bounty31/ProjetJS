@@ -1,67 +1,105 @@
 var queue;
 var themes = ["rouge", "bleu", "vert", "violet"];
+var snake_game;
+var players_list = [];
 
 for (var i = 0; i < themes.length; i++) {
     themes[i] = "images/" + themes[i] + ".png";
 }
 
-function printObjectNow(object, detailed) {
-	if (detailed) {
-		console.log(JSON.stringify(object));
-	}
-	else {
-		console.log($.extend({}, object));
-	}
-}
-
 function startLoading() {
-	console.log("Starting Snake game...");
 	queue = new createjs.LoadQueue();
 
-	console.log("Loading " + themes.length + " elements:");
-	for (var i = 0; i < themes.length; i++) {
-		console.log("   " + themes[i]);
+    for (var i = 0; i < themes.length; i++) {
 		queue.loadFile(themes[i]);
 	}
-	queue.on("complete", gameStart, this, false);
+	queue.on("complete", gameStartCallback, this, false);
 }
 
-function gameStart() {
+function gameStartCallback() {
+    console.log("# Loaded images.");
+    gameStart(4, [0, 1, 2, 3], ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"]);
+}
+
+
+TweenLite.set($("#snake_menu"), {y:"-680px"});
+showMenu();
+var menu = true;
+
+function showMenu() {
+    TweenMax.to($("#snake_menu"), 0.3, {y:"0px"});
+}
+function hideMenu() {
+    TweenMax.to($("#snake_menu"), 0.3, {y:"-680px"});
+}
+
+$(document).keyup(function(e) {
+	var key = e.which;
+    e.preventDefault();
+
+    // Space (pause)
+	if (key == "32") {
+		if (menu) {
+            hideMenu();
+            snake_game.unpauseGame();
+		}
+		else {
+			showMenu();
+            if (snake_game != null)
+                snake_game.pauseGame();
+		}
+		menu = !menu;
+	}
+    // Esc (Exit)
+    if (key == "27") {
+        snake_game.destroy();
+        snake_game = null;
+        players_list = [];
+    }
+
+    if (key == "86") {
+        snake_game.addElement();
+
+    }
+})
+
+function gameStart(players, color_list, players_names) {
 	var themeImages = [];
+    var snake_speed = 250;
+    var start_position = ["x", "y", "x", "y"];
+    var start_coords = [{x:0, y:0}, {x:28, y:0}, {x:18, y:18}, {x:0, y:2}];
+    var default_mapping = ["directionnal_keys", "zqsd_keys", "uhjk_keys", "5123_keys"];
+    key_names = ["s_right", "s_down", "s_right", "s_down"];
+
 
 	for (var i = 0; i < themes.length; i++) {
 		themeImages.push(queue.getResult(themes[i]));
 	}
 
-	var snake_game = new SnakeGame(30, 15, 2, 250, false); //Creation du terrain de jeu
+	snake_game = new SnakeGame(30, 20, 2, snake_speed, false); //Creation du terrain de jeu
 
-	var joueur1 = new Snake("Abrakadabra", 15, "x", 10, 0, "directionnal_keys"); // Creation du joueur
-	var joueur2 = new Snake("Jean Mi du 13", 10, "x", 0, 5, "zqsd_keys"); // Creation du joueur
-	var joueur3 = new Snake("Dylan la kalash", 14, "x", 3, 10, "directionnal_keys"); // Creation du joueur
-	joueur1.create(themeImages[3], snake_game, true);
-	//joueur2.create(themeImages[1], snake_game, true);
-	//joueur3.create(themeImages[0], snake_game, true);
-
-	snake_game.addSnake(joueur1);
-	//snake_game.addSnake(joueur2);
-	// snake_game.addSnake(joueur3);
+    for (var i = 0; i < players; i++) {
+        players_list.push(new Snake(players_names[i], 4, start_position[i], start_coords[i].x, start_coords[i].y, default_mapping[i]));
+        players_list[i].create(themeImages[color_list[i]], snake_game, true);
+        snake_game.addSnake(players_list[i]);
+    }
 
 	$("#playBtn").on("click", function() {
-		joueur1.dead = true;
-		joueur1.replay.getTimeline().play();
+        for (var i = 0; i < players_list.length; i++) {
+            players_list[i].replay.getTimeline().play();
+        }
 	});
 
 	$("#pauseBtn").on("click", function() {
-		joueur1.dead = true;
-		joueur1.replay.getTimeline().pause();
+        for (var i = 0; i < players_list.length; i++) {
+            players_list[i].replay.getTimeline().pause();
+        }
 	});
 
 	$("#reverseBtn").on("click", function() {
-		joueur1.dead = true;
-		joueur1.replay.getTimeline().reverse();
-	});
-	$("#flashback").on("click", function() {
-		joueur1.flashback();
+        for (var i = 0; i < players_list.length; i++) {
+            players_list[i].replay.getTimeline().reverse();
+        }
 	});
 
 	$("#progressSlider").slider({
@@ -70,13 +108,11 @@ function gameStart() {
 		max: 1,
 		step:.001,
 		slide: function (event, ui) {
-			joueur1.replay.getTimeline().progress( ui.value ).pause();
-		}
+            for (var i = 0; i < players_list.length; i++) {
+                players_list[i].replay.getTimeline().progress(ui.value).pause();
+            }
+        }
 	});
 }
 
-//startLoading();
-
-
-
-
+startLoading();

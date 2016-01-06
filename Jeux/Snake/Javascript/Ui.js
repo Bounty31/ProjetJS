@@ -1,3 +1,5 @@
+var key_names = ["s_right", "s_down", "s_right", "s_down"];
+
 function initDefault() {
     $('.default').css("box-shadow", "0 0px 15px #DFA347");
     $('.default').css("background", "#EEA83D");
@@ -14,6 +16,7 @@ function initDefault() {
 $(document).ready(function() {
     var nbr_players = 1;
     var players_colors = [0, 1, 2, 3];
+    var players_names = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"];
 
     initDefault();
 
@@ -66,9 +69,30 @@ $(document).ready(function() {
 
 
     $('.menu_button_play').click(function() {
-        console.log("Starting the game : ");
-        console.log(" " + nbr_players + " players");
-        console.log(" " + players_colors + " colors");
+        for (var i = 0; i < 4; i++) {
+            if ($(".player" + (i+1)).val() != "") {
+                players_names[i] = $(".player" + (i+1)).val();
+            }
+        }
+        hideMenu();
+        menu = false;
+
+        console.log("# Starting new game : " + nbr_players + " " + players_names + " " + players_colors);
+        $(".replay").css("display", "none");
+
+        if (snake_game != null) {
+            players_list = [];
+            snake_game.destroy();
+
+            setTimeout(function() {
+                snake_game = null;
+                gameStart(nbr_players, players_colors, players_names);
+            }, 700);
+        }
+        else {
+            players_list = [];
+            gameStart(nbr_players, players_colors, players_names);
+        }
     });
 
 

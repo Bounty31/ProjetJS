@@ -8,6 +8,8 @@ function SnakeGame(coeffWidth, coeffHeight, size, speed, borders) {
     this.borders = borders;
     this.state = "starting";
     this.ready = 0;
+    this.pause = false;
+    this.scores = [];
 
     this.stage = new createjs.Stage("snake_canvas");
     $("#snake_canvas").width(this.width);
@@ -27,6 +29,10 @@ SnakeGame.prototype.addSnake = function(snake) {
     }
     this.snakes.push(snake);
 }
+SnakeGame.prototype.addElement = function(element) {
+    this.snakes[0].grow(this, true);
+
+}
 SnakeGame.prototype.borderCollision = function(snake) {
     if (this.borders) {
         if (snake.frontCell.x + snake.f_x <= (-snake.size * 12)/2 || snake.frontCell.x + snake.f_x >= (this.width + (snake.size * 12)/2) ||
@@ -35,45 +41,99 @@ SnakeGame.prototype.borderCollision = function(snake) {
         }
     }
     else {
-        if (snake.frontCell.x + snake.f_x == (this.width + (snake.size * 12)/2 + snake.size)) {
+        var coeff = (snake.size * 12)/2;
+
+        if (snake.frontCell.x + snake.f_x == (this.width + coeff + snake.size)) {
             /* Adding the index of the first cell that should be animated */
 
             var animEnum = {
                 INDEX : snake.snake_array.length-1,
-                MOVETOX : (this.width + (snake.size * 12)/2 + snake.size),
+                MOVETOX : (this.width + coeff + snake.size),
                 MOVETOY : snake.frontCell.y
             };
             snake.borderEffectOut.push(animEnum);
 
             animEnum = {
                 INDEX : snake.snake_array.length,
-                TPTOX : -(snake.size * 12)/2,
+                TPTOX : -coeff,
                 TPTOY : snake.frontCell.y,
-                MOVETOX : (snake.size * 12)/2,
+                MOVETOX : coeff,
                 MOVETOY : snake.frontCell.y
             };
             snake.borderEffectIn.push(animEnum);
         }
-        else if (snake.frontCell.x + snake.f_x <= (-snake.size * 12)/2) {
-            console.log('pass');
-            // snake.frontCell.x = this.width + (snake.size * 12)/2 + snake.size;
+        else if (snake.frontCell.x + snake.f_x == (-coeff - snake.size)) {
+            var animEnum = {
+                INDEX : snake.snake_array.length-1,
+                MOVETOX : (-coeff - snake.size),
+                MOVETOY : snake.frontCell.y
+            };
+            snake.borderEffectOut.push(animEnum);
+
+            animEnum = {
+                INDEX : snake.snake_array.length,
+                TPTOX : this.width + coeff,
+                TPTOY : snake.frontCell.y,
+                MOVETOX : this.width - coeff,
+                MOVETOY : snake.frontCell.y
+            };
+            snake.borderEffectIn.push(animEnum);
         }
-        /*else if (snake.frontCell.y >= (this.height + (snake.size * 12)/2)) {
-         snake.frontCell.y = - snake.size * 12 / 2 - snake.size;
-         // snake.borderEffectIn.push(snake.length);
-         }
-         else if (snake.frontCell.y <= (-snake.size * 12)/2) {
-         snake.frontCell.y = this.height + (snake.size * 12)/2 + snake.size;
-         // snake.borderEffectIn.push(snake.length);
-         }*/
+        else if (snake.frontCell.y + snake.f_y == (this.height + coeff + snake.size)) {
+            var animEnum = {
+                INDEX : snake.snake_array.length-1,
+                MOVETOX : snake.frontCell.x,
+                MOVETOY : (this.height + coeff + snake.size)
+            };
+            snake.borderEffectOut.push(animEnum);
+
+            animEnum = {
+                INDEX : snake.snake_array.length,
+                TPTOX : snake.frontCell.x,
+                TPTOY : -coeff,
+                MOVETOX : snake.frontCell.x,
+                MOVETOY : coeff
+            };
+            snake.borderEffectIn.push(animEnum);
+        }
+        else if (snake.frontCell.y + snake.f_y == (-coeff - snake.size)) {
+            var animEnum = {
+                INDEX : snake.snake_array.length-1,
+                MOVETOX : snake.frontCell.x,
+                MOVETOY : (-coeff - snake.size)
+            };
+            snake.borderEffectOut.push(animEnum);
+
+            animEnum = {
+                INDEX : snake.snake_array.length,
+                TPTOX : snake.frontCell.x,
+                TPTOY : this.height + coeff,
+                MOVETOX : snake.frontCell.x,
+                MOVETOY : this.height - coeff
+            };
+            snake.borderEffectIn.push(animEnum);
+        }
+    }
+}
+SnakeGame.prototype.pauseGame = function() {
+    this.pause = true;
+}
+SnakeGame.prototype.unpauseGame = function() {
+    this.pause = false;
+}
+SnakeGame.prototype.destroy = function() {
+    for (var i = 0; i < this.snakes.length; i++) {
+        this.snakes[i].die(this, "destroyed", true);
     }
 }
 SnakeGame.prototype.handleTick = function() {
-    if (this.state == "playing") {
-        this.update();
-    }
-    else if (this.state == "gameOver") {
-        this.snakes[0].replay.showButtons();
+    if (!this.pause) {
+        if (this.state == "playing") {
+            this.update();
+        }
+        else if (this.state == "gameOver") {
+            this.snakes[0].replay.showButtons();
+        }
     }
     this.render();
 }
@@ -88,6 +148,9 @@ SnakeGame.prototype.update = function() {
 
             /* Border collision */
             this.borderCollision(this.snakes[i]);
+
+            /* Snakes collisions */
+            this.snakes[i].snakesCollision(this, i);
 
             /* Animation */
             this.snakes[i].animate(this.stage, this.speed);
