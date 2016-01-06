@@ -104,7 +104,7 @@ SnakeGame.prototype.borderCollision = function(snake) {
             /* Adding the index of the first cell that should be animated */
 
             var animEnum = {
-                INDEX : snake.snake_array.length-1,
+                INDEX : snake.snake_garray.length-1,
                 MOVETOX : (this.width + coeff + snake.size),
                 MOVETOY : snake.frontCell.y
             };
