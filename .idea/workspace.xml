@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="be6c870b-274a-46f3-9817-52f8b84018e4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Achievements/achievements.json" afterPath="$PROJECT_DIR$/Achievements/achievements.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Jeux/Snake/Css/style.css" afterPath="$PROJECT_DIR$/Jeux/Snake/Css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Jeux/Snake/Javascript/Animations.js" afterPath="$PROJECT_DIR$/Jeux/Snake/Javascript/Animations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Jeux/Snake/Javascript/SnakeGame.js" afterPath="$PROJECT_DIR$/Jeux/Snake/Javascript/SnakeGame.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Jeux/Snake/Javascript/States.js" afterPath="$PROJECT_DIR$/Jeux/Snake/Javascript/States.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Jeux/Snake/index.html" afterPath="$PROJECT_DIR$/Jeux/Snake/index.html" />
     </list>
     <ignored path="ProjetJS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -578,7 +572,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452086588803</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="V 0.9">
+      <created>1452112005696</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1452112005696</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -630,7 +630,8 @@
     <MESSAGE value="V 0.8" />
     <MESSAGE value="V 0.8.5 Snake +" />
     <MESSAGE value="V 0.8.6 Menu responsiveness correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="V 0.8.6 Menu responsiveness correction" />
+    <MESSAGE value="V 0.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="V 0.9" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
