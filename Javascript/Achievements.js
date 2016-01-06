@@ -12,7 +12,7 @@ function Achievements() {
     this.text = document.getElementById("textAchievement");
     this.icon = document.getElementById("iconAchievement");
     //à revoir pour la gestion des chemins
-    $.getJSON("../Achievements/achievements.json").done(function(json) {
+    $.getJSON("http://localhost/ProjetJS/Achievements/achievements.json").done(function(json) {
         self.achievements_list = json.achievements;
         console.log(json.achievements);
     });
