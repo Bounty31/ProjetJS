@@ -86,8 +86,9 @@
 
 
 	function newAchievement(achievement){
-		xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET","Javascript/fonctions.php?q=achievement&achievement="+achievement,true);
+	xmlhttp = new XMLHttpRequest();
+		if(id_user==undefined)
+			id_user = 0;
+		xmlhttp.open("GET","Javascript/fonctions.php?q=achievement&achievement="+achievement+"&joueur="+id_user,true);
 		xmlhttp.send();
-		xmlhttp.onreadystatechange =  function(){alert("score ajouté dans la bdd");};
 	}

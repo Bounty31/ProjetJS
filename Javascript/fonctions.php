@@ -14,7 +14,7 @@ function choixFonction($query){
 	if($query=="validation")
 		validation();	
 	if($query=="achievement")
-		ajoutAchievement();	
+		ajoutAchievement($_GET["joueur"],$_GET["achievement"]);	
 	if($query=="score")
 		ajoutScore($_GET["joueur"],$_GET["score"],$_GET["jeu"]);	
 }
@@ -56,6 +56,16 @@ function XMLValidatePseudo($pseudo){
 }
 //INSERT INTO `bddjs`.`score` (`id_score`, `id_user`, `score`, `id_jeu`) VALUES (NULL, '1', '854', '1');
 
+
+function ajoutScore($joueur,$score,$jeu){
+	//connexion à la base de données
+	$con = connexionBDD();
+//Lancer la requête
+	mysqli_query($con, "INSERT INTO score VALUES (NULL, ".$joueur.", ".$score.", ".$jeu.")");
+
+ mysqli_close($con);
+
+}
 
 function ajoutScore($joueur,$score,$jeu){
 	//connexion à la base de données
