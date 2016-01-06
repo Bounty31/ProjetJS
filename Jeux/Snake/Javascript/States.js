@@ -1,5 +1,5 @@
 var queue;
-var themes = ["rouge", "bleu", "vert", "violet"];
+var themes = ["rouge", "bleu", "vert", "violet", "point"];
 var snake_game;
 var players_list = [];
 
@@ -58,8 +58,7 @@ $(document).keyup(function(e) {
     }
 
     if (key == "86") {
-        snake_game.addElement();
-
+        snake_game.pointsHandler();
     }
 })
 
@@ -76,7 +75,7 @@ function gameStart(players, color_list, players_names) {
 		themeImages.push(queue.getResult(themes[i]));
 	}
 
-	snake_game = new SnakeGame(30, 20, 2, snake_speed, false); //Creation du terrain de jeu
+	snake_game = new SnakeGame(30, 20, 2, snake_speed, themeImages[4], false); //Creation du terrain de jeu
 
     for (var i = 0; i < players; i++) {
         players_list.push(new Snake(players_names[i], 4, start_position[i], start_coords[i].x, start_coords[i].y, default_mapping[i]));

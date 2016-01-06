@@ -1,7 +1,10 @@
-function SnakeGame(coeffWidth, coeffHeight, size, speed, borders) {
+function SnakeGame(coeffWidth, coeffHeight, size, speed, pointsImg, borders) {
     this.snakes = [];
 
     this.size = size;
+    this.coeffWidth = coeffWidth;
+    this.coeffHeight = coeffHeight;
+    this.pointsImg = pointsImg;
     this.width = coeffWidth * this.size * 13 - this.size;
     this.height = coeffHeight * this.size * 13 - this.size;
     this.speed = speed;
@@ -10,6 +13,7 @@ function SnakeGame(coeffWidth, coeffHeight, size, speed, borders) {
     this.ready = 0;
     this.pause = false;
     this.scores = [];
+    this.apples = [];
 
     this.stage = new createjs.Stage("snake_canvas");
     $("#snake_canvas").width(this.width);
@@ -29,9 +33,58 @@ SnakeGame.prototype.addSnake = function(snake) {
     }
     this.snakes.push(snake);
 }
-SnakeGame.prototype.addElement = function(element) {
-    this.snakes[0].grow(this, true);
+SnakeGame.prototype.pointsHandler = function() {
+    /* First time */
+    if (this.apples.length == 0) {
+        var randomX = Math.floor((Math.random() * this.coeffWidth) + 1) * this.size * 13 + this.size * 12/2;
+        var randomY = Math.floor((Math.random() * this.coeffHeight) + 1) * this.size * 13 + this.size * 12/2;
 
+        this.apples.push(new createjs.Bitmap(this.pointsImg));
+
+        TweenLite.set(this.apples[0], {
+            x:randomX, y:randomY,
+            scaleX:this.size, scaleY:this.size,
+            regX:6, regY:6,
+            alpha:1
+        });
+
+        this.stage.addChild(this.apples[0]);
+    }
+    else {
+        var c = 0;
+
+        for (var i = 0; i < this.apples.length; i++) {
+            if (this.apples[i].alpha == 1) {
+                c++;
+            }
+        }
+
+        if (c == 0) {
+            var randomX = Math.floor((Math.random() * this.coeffWidth) + 1) * this.size * 13 + this.size * 12/2;
+            var randomY = Math.floor((Math.random() * this.coeffHeight) + 1) * this.size * 13 + this.size * 12/2;
+
+            this.apples.push(new createjs.Bitmap(this.pointsImg));
+
+            TweenLite.set(this.apples[this.apples.length - 1], {
+                x:randomX, y:randomY,
+                scaleX:this.size, scaleY:this.size,
+                regX:6, regY:6,
+                alpha:1
+            });
+
+            this.stage.addChild(this.apples[this.apples.length - 1]);
+        }
+    }
+}
+SnakeGame.prototype.pointsCollision = function(snake) {
+    for (var i = 0; i < this.apples.length; i++) {
+        if (snake.frontCell.x == this.apples[i].x &&
+            snake.frontCell.y == this.apples[i].y) {
+            console.log("collision");
+            snake.grow(this, true);
+            this.apples[i].alpha = 0;
+        }
+    }
 }
 SnakeGame.prototype.borderCollision = function(snake) {
     if (this.borders) {
@@ -152,10 +205,16 @@ SnakeGame.prototype.update = function() {
             /* Snakes collisions */
             this.snakes[i].snakesCollision(this, i);
 
+            /* Snake points check */
+            this.pointsCollision(this.snakes[i]);
+
             /* Animation */
             this.snakes[i].animate(this.stage, this.speed);
         }
     }
+
+    this.pointsHandler();
+
     var c = 0;
     for (var i = 0; i < this.snakes.length; i++) {
         if (this.snakes[i].showReplay) {

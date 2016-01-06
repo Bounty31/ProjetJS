@@ -1,5 +1,5 @@
 {"achievements":[
-    {"name":"Niqueur de meres","icon":"fa fa-pencil", "ID":"0"},
-    {"name":"Baiseur de darones","icon":"fa fa-cogs", "ID":"1"},
-    {"name":"Defourailleur de genitrices","icon":"fa fa-tree", "ID":"2"}
+    {"name":"Première connexion!","icon":"fa fa-pencil", "ID":"0", "idJeux":"0"},
+    {"name":"Mode multijoueur activé!","icon":"fa fa-cogs", "ID":"1", "idJeux":"0"},
+    {"name":"Premier point!","icon":"fa fa-tree", "ID":"2", "idJeux":"0"}
 ]}

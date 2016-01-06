@@ -44,41 +44,21 @@ Animation.prototype.create = function(snake) {
 		{alpha:1, onUpdate:function() { self.snakeGame.render(); }}, -0.1);
 }
 Animation.prototype.grow = function(snake) {
-	var self = this;
     snake.length += 1;
 
     TweenLite.set(snake.snake_array[0], {
-        x:20, y:20,
+        x:snake.snake_array[1].x, y:snake.snake_array[1].y,
         scaleX:snake.size, scaleY:snake.size,
         regX:snake.themeImage.width/2, regY:snake.themeImage.height/2,
         alpha:1
     });
 
-    var firstX = snake.snake_array[1].x
-    var firstY = snake.snake_array[1].y
-
-    var secondX = snake.snake_array[2].x
-    var secondY = snake.snake_array[2].y
-
-    //if ()
-
-    //TweenLite.fromTo(snake.snake_array[0], 0.2, {
-		//alpha:0,
-    //    scaleX:snake.size, scaleY:snake.size,
-    //    x:snake.snake_array[1].x,
-    //    y:snake.snake_array[1].y,
-    //    regX:snake.themeImage.width/2,
-    //    regY:snake.themeImage.height/2
-    //}, {
-    //    onUpdate:function() { self.snakeGame.render(); },
-    //    alpha:1,
-    //    scaleX:snake.size, scaleY:snake.size,
-    //    x:20,
-    //    y:20,
-    //    regX:snake.themeImage.width/2,
-    //    regY:snake.themeImage.height/2
-    //});
-
+    snake.replay.getTimeline().set(snake.snake_array[0], {
+        x:snake.snake_array[1].x, y:snake.snake_array[1].y,
+        scaleX:snake.size, scaleY:snake.size,
+        regX:snake.themeImage.width/2, regY:snake.themeImage.height/2,
+        alpha:1
+    });
 }
 Animation.prototype.move = function(snake, speed) {
 	var self = this;
