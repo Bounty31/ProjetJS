@@ -1,13 +1,19 @@
 	var password;
+	var id_user;
 	function testIfExists (){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			x=xmlhttp.responseXML.getElementsByTagName ("login");
 			for (i=0;i<x.length;i++){
 				if(x[i].hasChildNodes()){
-					password = x[i].getElementsByTagName("password")[0].nodeValue;
 					xx=x[i].getElementsByTagName("password")[0];
 					txt=xx.childNodes[0].nodeValue;
 					password = txt
+
+					//enregistrement de l'id du joueur
+					xx=x[i].getElementsByTagName("iduser")[0];
+					txt=xx.childNodes[0].nodeValue;
+					id_user = txt;
+
 					document.getElementById('validationPseudo').innerHTML = "Existe";
 				}
 				else{
@@ -28,15 +34,17 @@
 	}
 
 	function validatePassword(){
+		
 		var passwordDiv = document.getElementById("password").value;
-		if(password!="" && passwordDiv == password ){
+		if(password!="" && passwordDiv == password){
 			connexion();
 		}
-		else{
+		else if(getCookie("connected") != "true"){
 			setCookie("connected",false);
 			alert("cookie : connected = "+getCookie("connected"));
-
 		}
+		
+
 	}
 
 	function setCookie(name,value) {
@@ -53,7 +61,33 @@
 		}
 
 	}
+
+	function newScore(idjeu,score){
+		xmlhttp = new XMLHttpRequest();
+		if(id_user==undefined)
+			id_user = 0;
+		xmlhttp.open("GET","Javascript/fonctions.php?q=score&score="+score+"&jeu="+idjeu+"&joueur="+id_user,true);
+		xmlhttp.send();
+	}
+
 	function connexion(){
-		setCookie("connected",true);
-		alert("cookie : connected = "+getCookie("connected"));
+		if(!(getCookie("connected")=="true")){
+
+			setCookie("connected","true");
+
+			setCookie("iduser",id_user);
+			alert(id_user);
+			alert("cookie : connected ="+getCookie("connected"));
+		}
+		else
+			alert("Vous êtes déjà connecté")
+	}
+
+
+
+	function newAchievement(achievement){
+		xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET","Javascript/fonctions.php?q=achievement&achievement="+achievement,true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange =  function(){alert("score ajouté dans la bdd");};
 	}
