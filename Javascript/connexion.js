@@ -66,7 +66,7 @@
 		xmlhttp = new XMLHttpRequest();
 		if(id_user==undefined)
 			id_user = 0;
-		xmlhttp.open("GET","Javascript/fonctions.php?q=score&score="+score+"&jeu="+idjeu+"&joueur="+id_user,true);
+		xmlhttp.open("GET","../../Javascript/fonctions.php?q=score&score="+score+"&jeu="+idjeu+"&joueur="+id_user,true);
 		xmlhttp.send();
 	}
 

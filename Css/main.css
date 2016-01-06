@@ -167,6 +167,7 @@ button {
     right: 10px;
     height: 0px;
     background: blue;
+    z-index: 200;
 }
 
 #achievement {

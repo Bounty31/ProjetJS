@@ -19,7 +19,6 @@ function Snake(name, init_length, init_direction, x_offset, y_offset, control_ke
     this.dead = false;
     this.showReplay = false;
     this.themeImage = null;
-    this.score = 0;
 }
 Snake.prototype.create = function(themeImage, snakeGame, debug) {
     this.size = snakeGame.size;
@@ -128,6 +127,10 @@ Snake.prototype.snakesCollision = function(snakeGame, index) {
 Snake.prototype.die = function(snakeGame, animation, debug) {
     this.animation.die(this, animation);
     this.dead = true;
+
+    if (snakeGame.snakes.length == 1) {
+        newScore(0, this.length);
+    }
 
     if (debug) {
         if (animation == "self1") {

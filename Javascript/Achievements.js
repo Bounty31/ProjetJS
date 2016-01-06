@@ -14,12 +14,12 @@ function Achievements() {
     //à revoir pour la gestion des chemins
     $.getJSON("http://localhost/ProjetJS/Achievements/achievements.json").done(function(json) {
         self.achievements_list = json.achievements;
-        console.log(json.achievements);
     });
 };
 
 //Recupere l'achievement correspondant dans le tableau json
 Achievements.prototype.get = function(index, temps) {
+    console.log(this.achievements_list);
     this.currentAchievement = this.achievements_list[index];
     this.text.innerHTML = this.currentAchievement["name"];
     this.icon.className = this.currentAchievement["icon"];

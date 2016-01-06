@@ -18,6 +18,7 @@ function startLoading() {
 
 function gameStartCallback() {
     console.log("# Loaded images.");
+    mAchievements.get(0, 3000);
     gameStart(4, [0, 1, 2, 3], ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"]);
 }
 
@@ -69,6 +70,10 @@ function gameStart(players, color_list, players_names) {
     var start_coords = [{x:0, y:0}, {x:28, y:0}, {x:18, y:18}, {x:0, y:2}];
     var default_mapping = ["directionnal_keys", "zqsd_keys", "uhjk_keys", "5123_keys"];
     key_names = ["s_right", "s_down", "s_right", "s_down"];
+
+    if (players == 2) {
+        mAchievements.get(1, 3000);
+    }
 
 
 	for (var i = 0; i < themes.length; i++) {

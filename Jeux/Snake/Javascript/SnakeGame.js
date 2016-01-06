@@ -80,9 +80,13 @@ SnakeGame.prototype.pointsCollision = function(snake) {
     for (var i = 0; i < this.apples.length; i++) {
         if (snake.frontCell.x == this.apples[i].x &&
             snake.frontCell.y == this.apples[i].y) {
-            console.log("collision");
+
             snake.grow(this, true);
+            snake.length += 1;
             this.apples[i].alpha = 0;
+            if (snake.length == 6) {
+                mAchievements.get(2, 3000);
+            }
         }
     }
 }
