@@ -97,7 +97,7 @@ button {
     font-size: 19px;
 }
 
-.menu_button_players, .menu_button_play, .menu_button {
+.menu_button_players, .menu_button_border, .menu_button_play, .menu_button {
     font-family: Arial;
     color: #ffffff;
     font-size: 22px;
@@ -110,6 +110,7 @@ button {
 }
 .menu_button_players:hover,
 .menu_button_play:hover,
+.menu_button_border:hover,
 .menu_button:hover {
     background: #25a8fa !important;
     text-decoration: none;

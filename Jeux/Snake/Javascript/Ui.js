@@ -15,6 +15,7 @@ function initDefault() {
 
 $(document).ready(function() {
     var nbr_players = 1;
+    var border = true;
     var players_colors = [0, 1, 2, 3];
     var players_names = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"];
 
@@ -67,6 +68,17 @@ $(document).ready(function() {
         $(this).addClass("selected");
     });
 
+    $('.menu_button_border').click(function() {
+        border = $(this).val();
+
+        $('.menu_button_border').css("box-shadow", "0 0px 15px #338CC7");
+        $('.menu_button_border').css("background", "#3498db");
+        $('.menu_button_border').removeClass("selected");
+
+        $(this).css("box-shadow", "0 0px 15px #DFA347");
+        $(this).css("background", "#EEA83D");
+        $(this).addClass("selected");
+    });
 
     $('.menu_button_play').click(function() {
         for (var i = 0; i < 4; i++) {
@@ -77,7 +89,11 @@ $(document).ready(function() {
         hideMenu();
         menu = false;
 
-        console.log("# Starting new game : " + nbr_players + " " + players_names + " " + players_colors);
+        var sizeX = $(".sizeX").val();
+        var sizeY = $(".sizeY").val();
+        console.log(sizeX);
+
+        console.log("# Starting new game : " + nbr_players + " " + players_names + " " + players_colors + " " + border);
         $(".replay").css("display", "none");
 
         if (snake_game != null) {
@@ -86,12 +102,12 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 snake_game = null;
-                gameStart(nbr_players, players_colors, players_names);
+                gameStart(nbr_players, players_colors, players_names, border, sizeX, sizeY);
             }, 700);
         }
         else {
             players_list = [];
-            gameStart(nbr_players, players_colors, players_names);
+            gameStart(nbr_players, players_colors, players_names, border, sizeX, sizeY);
         }
     });
 

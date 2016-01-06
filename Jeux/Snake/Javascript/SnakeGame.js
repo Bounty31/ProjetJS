@@ -82,11 +82,13 @@ SnakeGame.prototype.pointsCollision = function(snake) {
             snake.frontCell.y == this.apples[i].y) {
 
             snake.grow(this, true);
-            snake.length += 1;
+
             this.apples[i].alpha = 0;
             if (snake.length == 6) {
                 mAchievements.get(2, 3000);
             }
+
+            snake.length += 1;
         }
     }
 }
@@ -104,7 +106,7 @@ SnakeGame.prototype.borderCollision = function(snake) {
             /* Adding the index of the first cell that should be animated */
 
             var animEnum = {
-                INDEX : snake.snake_garray.length-1,
+                INDEX : snake.snake_array.length-1,
                 MOVETOX : (this.width + coeff + snake.size),
                 MOVETOY : snake.frontCell.y
             };

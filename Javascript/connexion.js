@@ -1,5 +1,6 @@
 var password;
 var id_user;
+
 function testIfExists() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         x = xmlhttp.responseXML.getElementsByTagName("login");
@@ -13,6 +14,8 @@ function testIfExists() {
                 xx = x[i].getElementsByTagName("iduser")[0];
                 txt = xx.childNodes[0].nodeValue;
                 id_user = txt;
+
+                setCookie("iduser", txt);
 
                 document.getElementById('validationPseudo').innerHTML = "Existe";
             }
@@ -67,7 +70,13 @@ function newScore(idjeu, score) {
     xmlhttp = new XMLHttpRequest();
     if (id_user == undefined)
         id_user = 0;
-    xmlhttp.open("GET", "../../Javascript/fonctions.php?q=score&score=" + score + "&jeu=" + idjeu + "&joueur=" + id_user, true);
+    if (getCookie("iduser") == "1" || getCookie("iduser") == "2") {
+        id_user = getCookie("iduser");
+    }
+    console.log(getCookie("iduser"));
+    console.log("//localhost/ProjetJS/Javascript/fonctions.php?q=score&score=" + score + "&jeu=" + idjeu + "&joueur=" + id_user);
+
+    xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=score&score=" + score + "&jeu=" + idjeu + "&joueur=" + id_user, true);
     xmlhttp.send();
 }
 
@@ -77,8 +86,8 @@ function connexion() {
         setCookie("connected", "true");
 
         setCookie("iduser", id_user);
-        alert(id_user);
-        alert("cookie : connected =" + getCookie("connected"));
+        //alert(id_user);
+        //alert("cookie : connected =" + getCookie("connected"));
     }
     else
         alert("Vous êtes déjà connecté")

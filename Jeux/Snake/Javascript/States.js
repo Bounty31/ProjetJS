@@ -19,7 +19,7 @@ function startLoading() {
 function gameStartCallback() {
     console.log("# Loaded images.");
     mAchievements.get(0, 3000);
-    gameStart(4, [0, 1, 2, 3], ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"]);
+    gameStart(4, [0, 1, 2, 3], ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"], 30, 20);
 }
 
 
@@ -57,13 +57,9 @@ $(document).keyup(function(e) {
         snake_game = null;
         players_list = [];
     }
-
-    if (key == "86") {
-        snake_game.pointsHandler();
-    }
 })
 
-function gameStart(players, color_list, players_names) {
+function gameStart(players, color_list, players_names, border, sizeX, sizeY) {
 	var themeImages = [];
     var snake_speed = 250;
     var start_position = ["x", "y", "x", "y"];
@@ -75,12 +71,13 @@ function gameStart(players, color_list, players_names) {
         mAchievements.get(1, 3000);
     }
 
-
 	for (var i = 0; i < themes.length; i++) {
 		themeImages.push(queue.getResult(themes[i]));
 	}
 
-	snake_game = new SnakeGame(30, 20, 2, snake_speed, themeImages[4], false); //Creation du terrain de jeu
+    var isTrueSet = (border === 'true');
+
+	snake_game = new SnakeGame(sizeX, sizeY, 2, snake_speed, themeImages[4], isTrueSet); //Creation du terrain de jeu
 
     for (var i = 0; i < players; i++) {
         players_list.push(new Snake(players_names[i], 4, start_position[i], start_coords[i].x, start_coords[i].y, default_mapping[i]));

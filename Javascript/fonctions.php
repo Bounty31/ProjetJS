@@ -67,7 +67,7 @@ function ajoutScore($joueur,$score,$jeu){
 
 }
 
-function ajoutScore($joueur,$score,$jeu){
+function ajoutAchievement($joueur,$score,$jeu){
 	//connexion à la base de données
 	$con = connexionBDD();
 //Lancer la requête
