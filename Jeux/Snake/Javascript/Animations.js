@@ -53,8 +53,14 @@ Animation.prototype.grow = function(snake) {
         regX:snake.themeImage.width/2, regY:snake.themeImage.height/2,
         alpha:1
     });
-    console.log(snake.snake_array[0]);
-    console.log(snake.snake_array[1]);
+
+    var firstX = snake.snake_array[1].x
+    var firstY = snake.snake_array[1].y
+
+    var secondX = snake.snake_array[2].x
+    var secondY = snake.snake_array[2].y
+
+    //if ()
 
     //TweenLite.fromTo(snake.snake_array[0], 0.2, {
 		//alpha:0,

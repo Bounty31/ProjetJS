@@ -6,6 +6,7 @@ var hoverAnimation = 0;
 $(document).ready(function() {
     hover = false;
     TweenLite.set($(".game_img"), {scale:0});
+    TweenLite.set($("#games"), {y:-380});
 
     /* Dropdown animations */
     $(".drop").mouseenter(function(e) {

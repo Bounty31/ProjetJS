@@ -1,6 +1,6 @@
 function animationDropIn(i) {
     if (i == 0) {
-        TweenMax.to($("#games"), 0.2, {marginTop: "0px"});
+        TweenMax.to($("#games"), 0.2, {y: 0});
         TweenMax.set($(".game_img"), {opacity: 0});
         TweenMax.staggerFromTo($(".game_img"), 0.15, {
             opacity: 0,
@@ -11,7 +11,7 @@ function animationDropIn(i) {
         }, 0.1);
     }
     else if (i == 1) {
-        TweenMax.to($("#games"), 0.2, {marginTop: "0px"});
+        TweenMax.to($("#games"), 0.2, {y: 0});
 
         TweenMax.staggerFromTo($(".game_img"), 0.3, {
             opacity: 0,
@@ -22,9 +22,9 @@ function animationDropIn(i) {
         }, 0.1);
 
         TweenMax.staggerFromTo($(".game"), 0.3, {
-            marginTop: "-120px"
+            y: -120
         }, {
-            marginTop: "0px"
+            y: 0
         }, 0.05);
     }
 }
@@ -40,9 +40,9 @@ function animationDropOut(i) {
         }, 0.05);
         var width = $(window).width();
         if (width <= 1170)
-            TweenMax.to($("#games"), 0.4, {marginTop:"-390px"});
+            TweenMax.to($("#games"), 0.4, {y:-390});
         else
-            TweenMax.to($("#games"), 0.4, {marginTop:"-200px"});
+            TweenMax.to($("#games"), 0.4, {y:-200});
     }
     else if (i == 1) {
         TweenMax.staggerTo($(".game_img"), 0.3, {
@@ -50,9 +50,9 @@ function animationDropOut(i) {
             scale: 1
         }, 0.05);
         TweenMax.to($(".game"), 0.25, {
-            marginTop: "-120px"
+            y: -120
         });
-        TweenMax.to($("#games"), 0.4, {marginTop:"-380px"});
+        TweenMax.to($("#games"), 0.4, {y:-380});
     }
 }
 
