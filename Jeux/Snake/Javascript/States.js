@@ -22,7 +22,7 @@ function gameStartCallback() {
 }
 
 
-TweenLite.set($("#snake_menu"), {y:"-680px"});
+TweenLite.set($("#snake_menu"), {y:"-1000px"});
 showMenu();
 var menu = true;
 
@@ -30,7 +30,7 @@ function showMenu() {
     TweenMax.to($("#snake_menu"), 0.3, {y:"0px"});
 }
 function hideMenu() {
-    TweenMax.to($("#snake_menu"), 0.3, {y:"-680px"});
+    TweenMax.to($("#snake_menu"), 0.3, {y:"-1000px"});
 }
 
 $(document).keyup(function(e) {
