@@ -14,15 +14,13 @@ function testIfExists() {
                 xx = x[i].getElementsByTagName("iduser")[0];
                 txt = xx.childNodes[0].nodeValue;
                 id_user = txt;
-
-                setCookie("iduser", txt);
-
-                document.getElementById('validationPseudo').innerHTML = "Existe";
+                setCookie("iduser", id_user);
+                document.getElementById('login').style.color = "green";
             }
             else {
                 password = "";
                 setCookie("connected", false);
-                document.getElementById('validationPseudo').innerHTML = "N'éxiste pas";
+                document.getElementById('login').style.color= "red";
             }
         }
     }
@@ -42,10 +40,12 @@ function validatePassword() {
     var passwordDiv = document.getElementById("password").value;
     if (password != "" && passwordDiv == password) {
         connexion();
+        document.getElementById("password").style.background = "green";
+
     }
     else if (getCookie("connected") != "true") {
         setCookie("connected", false);
-        alert("cookie : connected = " + getCookie("connected"));
+        document.getElementById("password").style.background = "red";
     }
 
 
@@ -56,7 +56,7 @@ function setCookie(name, value) {
 }
 
 function getCookie(name) {
-    var tableauSplit = document.cookie.split(';');
+    var tableauSplit = document.cookie.split('; ');
     for (var i = 0; i < tableauSplit.length; i++) {
         var nCookie = tableauSplit[i].split("=")[0];
         if (nCookie == name) {
@@ -65,16 +65,42 @@ function getCookie(name) {
     }
 
 }
+function addAchievement(id){
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    x = xmlhttp.responseXML.getElementsByTagName("achievement");
+    for (i = 0; i < x.length; i++) {
+        if (!(x[i].hasChildNodes())) {
+            unlockAchievement(id);
+        }
+    }
+};
+}
+
+
+function unlock(id){
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=achievement&achievement=" + id+"&joueur="+getCookie("iduser"), true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){ addAchievement(id); }
+}
+
+
+function unlockAchievement(id){
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=unlock&achievement=" + id+"&joueur="+getCookie("iduser"), true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){
+        mAchievements.get(id);
+    };
+}
 
 function newScore(idjeu, score) {
     xmlhttp = new XMLHttpRequest();
     if (id_user == undefined)
-        id_user = 0;
+        id_user = 3;
     if (getCookie("iduser") == "1" || getCookie("iduser") == "2") {
         id_user = getCookie("iduser");
     }
-    console.log(getCookie("iduser"));
-    console.log("//localhost/ProjetJS/Javascript/fonctions.php?q=score&score=" + score + "&jeu=" + idjeu + "&joueur=" + id_user);
 
     xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=score&score=" + score + "&jeu=" + idjeu + "&joueur=" + id_user, true);
     xmlhttp.send();
@@ -101,3 +127,9 @@ function newAchievement(achievement) {
     xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=achievement&achievement=" + achievement + "&joueur=" + id_user, true);
     xmlhttp.send();
 }
+
+function deconnexion(){
+    setCookie("connected",false);
+    setCookie("iduser",3);
+    window.location.href = '//localhost/ProjetJS';
+};

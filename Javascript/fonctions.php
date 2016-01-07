@@ -14,9 +14,11 @@ function choixFonction($query){
 	if($query=="validation")
 		validation();	
 	if($query=="achievement")
-		ajoutAchievement($_GET["joueur"],$_GET["achievement"]);	
+		getAchievement($_GET["joueur"],$_GET["achievement"]);	
 	if($query=="score")
-		ajoutScore($_GET["joueur"],$_GET["score"],$_GET["jeu"]);	
+		ajoutScore($_GET["joueur"],$_GET["score"],$_GET["jeu"]);
+	if($query=="unlock")
+		unlock($_GET["joueur"],$_GET['achievement']);	
 }
 
 function validation(){
@@ -63,7 +65,7 @@ function ajoutScore($joueur,$score,$jeu){
 //Lancer la requête
 	mysqli_query($con, "INSERT INTO score VALUES (NULL, ".$joueur.", ".$score.", ".$jeu.")");
 
- mysqli_close($con);
+	mysqli_close($con);
 
 }
 
@@ -73,9 +75,47 @@ function ajoutAchievement($joueur,$score,$jeu){
 //Lancer la requête
 	mysqli_query($con, "INSERT INTO score VALUES (NULL, ".$joueur.", ".$score.", ".$jeu.")");
 
- mysqli_close($con);
+	mysqli_close($con);
 
 }
+function unlock($joueur,$achievement){
+	//connexion à la base de données
+	$con = connexionBDD();
+//Lancer la requête
+	mysqli_query($con, "INSERT INTO achievement VALUES (".$joueur.", ".$achievement.")");
 
+	mysqli_close($con);
+}
+
+function getAchievement($joueur,$achievement){
+
+
+//connexion à la base de données
+	$con = connexionBDD();
+//Lancer la requête
+	$result = mysqli_query($con, "SELECT *  FROM achievement where id_user=".$joueur." and id_achievement=".$achievement);
+// créer un nouveau document XML
+	$doc = new DomDocument('1.0');
+// créer la racine «Articles» et l'ajouter au document XML
+	$root = $doc->createElement('achievements');
+	$root = $doc->appendChild($root);
+
+/* Pour chaque nom d'article, créer un élément XML «Article» et ajouter
+ le à la racine «Articles» puis un élément texte qui contient le nom 
+ de l'article et ajouter le à l'article*/
+ $xml = new SimpleXMLElement('<xml/>');
+ $login = $xml->addChild('achievement');
+
+ while($row = mysqli_fetch_array($result)){
+ 	$login->addChild('id_user', $row['id_user']);
+
+ 	$login->addChild('id_achievement', $row['id_achievement']);
+ }
+
+ $xml_string = $doc->saveXML();
+ Header('Content-type: text/xml');
+ print($xml->asXML());
+
+}
 ?>  
 
