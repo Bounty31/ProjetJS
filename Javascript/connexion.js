@@ -3,6 +3,7 @@ var id_user;
 
 function testIfExists() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        console.log(xmlhttp.responseXML);
         x = xmlhttp.responseXML.getElementsByTagName("login");
         for (i = 0; i < x.length; i++) {
             if (x[i].hasChildNodes()) {
@@ -41,7 +42,8 @@ function validatePassword() {
     if (password != "" && passwordDiv == password) {
         connexion();
         document.getElementById("password").style.background = "green";
-
+        document.getElementById("messageConnexion").innerHTML = "Vous êtes connecté en tant que <b style=\"font-size:22px;\"\">"+document.getElementById("login").value+"</b>, des cookies vont etre enregistrés sur votre ordinateur";
+        TweenMax.to($('#messageBienvenue'),1,{y:+50});
     }
     else if (getCookie("connected") != "true") {
         setCookie("connected", false);
@@ -77,6 +79,19 @@ function addAchievement(id){
 }
 
 
+function isSet(id){
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    x = xmlhttp.responseXML.getElementsByTagName("achievement");
+    for (i = 0; i < x.length; i++) {
+        if (!(x[i].hasChildNodes())) {
+            return true;
+        }
+    }
+    return false;
+};
+}
+
+
 function unlock(id){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=achievement&achievement=" + id+"&joueur="+getCookie("iduser"), true);
@@ -84,7 +99,12 @@ function unlock(id){
     xmlhttp.onreadystatechange = function(){ addAchievement(id); }
 }
 
-
+function testAchiev(id){
+   xmlhttp = new XMLHttpRequest();
+   xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=achievement&achievement=" + id+"&joueur="+getCookie("iduser"), true);
+   xmlhttp.send();
+   xmlhttp.onreadystatechange = function(){ isSet(id); }
+}
 function unlockAchievement(id){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=unlock&achievement=" + id+"&joueur="+getCookie("iduser"), true);
@@ -112,7 +132,6 @@ function connexion() {
         setCookie("connected", "true");
 
         setCookie("iduser", id_user);
-        //alert(id_user);
         //alert("cookie : connected =" + getCookie("connected"));
     }
     else
@@ -128,8 +147,45 @@ function newAchievement(achievement) {
     xmlhttp.send();
 }
 
-function deconnexion(){
-    setCookie("connected",false);
-    setCookie("iduser",3);
-    window.location.href = '//localhost/ProjetJS';
+function supprimeCookie(){
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=deco");
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){
+     document.location.href = "//localhost/ProjetJS";
+ };
+}
+
+
+function displayScores(id){
+ xmlhttp = new XMLHttpRequest();
+ xmlhttp.open("GET", "//localhost/ProjetJS/Javascript/fonctions.php?q=getscores&jeu="+id, true);
+ xmlhttp.send();
+ xmlhttp.onreadystatechange = function(){
+    createHtmlScores();
 };
+}
+
+
+function createHtmlScores(){
+   if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    table ='<table class="rwd-table" ><tr><th>Classement</th><th>Score</th></tr>';
+    x = xmlhttp.responseXML.getElementsByTagName("score");
+    for (i = 0; i < x.length; i++) {
+        console.log(x[i]);
+        if (x[i].hasChildNodes()) {
+            xx = x[i].getElementsByTagName("scoret")[0];
+            txt = xx.childNodes[0].nodeValue;
+            score = txt;
+
+             xx = x[i].getElementsByTagName("classement")[0];
+            txt = xx.childNodes[0].nodeValue;
+            classement = txt;
+
+            table +='<tr><td>'+classement+'</td><td>'+score+'</td></tr>';
+        }
+    }
+    document.getElementById("scores").innerHTML =table+'</table>';
+
+}
+}

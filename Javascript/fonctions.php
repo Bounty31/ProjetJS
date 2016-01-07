@@ -1,7 +1,10 @@
 <?php
 if(isset($_GET['q']))
 	choixFonction($_GET['q']);
-
+if(isset($_GET['q']) && $_GET['q'] == "deco" ){
+	$_COOKIE["connected"] = false;
+	$_COOKIE["iduser"] = 3;
+}
 function connexionBDD(){
 	$link = mysqli_connect("localhost",'root','',"bddjs");
 	return $link;
@@ -18,7 +21,9 @@ function choixFonction($query){
 	if($query=="score")
 		ajoutScore($_GET["joueur"],$_GET["score"],$_GET["jeu"]);
 	if($query=="unlock")
-		unlock($_GET["joueur"],$_GET['achievement']);	
+		unlock($_GET["joueur"],$_GET['achievement']);
+	if($query=="getscores")
+		getScores($_GET["jeu"]);
 }
 
 function validation(){
@@ -110,6 +115,40 @@ function getAchievement($joueur,$achievement){
  	$login->addChild('id_user', $row['id_user']);
 
  	$login->addChild('id_achievement', $row['id_achievement']);
+ }
+
+ $xml_string = $doc->saveXML();
+ Header('Content-type: text/xml');
+ print($xml->asXML());
+
+}
+
+
+
+function getScores($jeu){
+
+
+//connexion à la base de données
+	$con = connexionBDD();
+//Lancer la requête
+	$result = mysqli_query($con, "SELECT *  FROM score where id_jeu=".$jeu." ORDER BY score desc");
+// créer un nouveau document XML
+	$doc = new DomDocument('1.0');
+// créer la racine «Articles» et l'ajouter au document XML
+	$root = $doc->createElement('scores');
+	$root = $doc->appendChild($root);
+
+/* Pour chaque nom d'article, créer un élément XML «Article» et ajouter
+ le à la racine «Articles» puis un élément texte qui contient le nom 
+ de l'article et ajouter le à l'article*/
+ $xml = new SimpleXMLElement('<xml/>');
+ $i=1;
+ while($row = mysqli_fetch_array($result)){
+ 	$login = $xml->addChild('score');
+
+ 	$login->addChild('classement', $i);
+ 	$i++;
+ 	$login->addChild('scoret', $row['score']);
  }
 
  $xml_string = $doc->saveXML();

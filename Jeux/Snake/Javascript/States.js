@@ -18,7 +18,7 @@ function startLoading() {
 
 function gameStartCallback() {
     console.log("# Loaded images.");
-    mAchievements.get(0, 3000);
+    unlock(0);
     gameStart(4, [0, 1, 2, 3], ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4"], 30, 20);
 }
 
@@ -68,7 +68,7 @@ function gameStart(players, color_list, players_names, border, sizeX, sizeY) {
     key_names = ["s_right", "s_down", "s_right", "s_down"];
 
     if (players == 2) {
-        mAchievements.get(1, 3000);
+        unlock(1);
     }
 
 	for (var i = 0; i < themes.length; i++) {

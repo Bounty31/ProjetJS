@@ -1,5 +1,10 @@
 {"achievements":[
-    {"name":"Première connexion!","icon":"fa fa-pencil", "ID":"0", "idJeux":"0"},
-    {"name":"Mode multijoueur activé!","icon":"fa fa-cogs", "ID":"1", "idJeux":"0"},
-    {"name":"Premier point!","icon":"fa fa-tree", "ID":"2", "idJeux":"0"}
+    {"name":"Première connexion!","icon":"fa fa-plus-circle", "ID":"0", "idJeux":"0"},
+    {"name":"Mode multijoueur activé!","icon":"fa fa-users", "ID":"1", "idJeux":"0"},
+    {"name":"Premier point!","icon":"fa fa-plus", "ID":"2", "idJeux":"0"},
+    {"name":"Anihilation","icon":"fa fa-fort-awesome", "ID":"3", "idJeux":"1"},
+    {"name":"Vous êtes invincible !","icon":"fa fa-bomb", "ID":"4", "idJeux":"1"},
+    {"name":"Flash ","icon":"fa fa-flash", "ID":"5", "idJeux":"1"},
+    {"name":"Premier point!","icon":"fa fa-tree", "ID":"6", "idJeux":"1"},
+    {"name":"Premier point!","icon":"fa fa-tree", "ID":"7", "idJeux":"1"}
 ]}

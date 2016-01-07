@@ -45,5 +45,9 @@ function RiseAchievementViaButton(temps) {
     var index = document.getElementById("inputTestIndex").value;
     mAchievements.get(index, temps);
 }
+
+function getListAchievement() {
+   return mAchievements.achievements_list;
+}
 // à declarer en tout debut de document
 var mAchievements = new Achievements();

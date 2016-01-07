@@ -83,96 +83,96 @@ SnakeGame.prototype.pointsCollision = function(snake) {
 
             snake.grow(this, true);
 
-            this.apples[i].alpha = 0;
-            if (snake.length == 6) {
-                mAchievements.get(2, 3000);
-            }
-
-            snake.length += 1;
+        this.apples[i].alpha = 0;
+        if (snake.length == 6) {
+            unlock(2);
         }
+
+        snake.length += 1;
     }
+}
 }
 SnakeGame.prototype.borderCollision = function(snake) {
     if (this.borders) {
         if (snake.frontCell.x + snake.f_x <= (-snake.size * 12)/2 || snake.frontCell.x + snake.f_x >= (this.width + (snake.size * 12)/2) ||
             snake.frontCell.y + snake.f_y <= (-snake.size * 12)/2 || snake.frontCell.y + snake.f_y >= (this.height + (snake.size * 12)/2)) {
             snake.die(this, "border", true);
-        }
     }
-    else {
-        var coeff = (snake.size * 12)/2;
+}
+else {
+    var coeff = (snake.size * 12)/2;
 
-        if (snake.frontCell.x + snake.f_x == (this.width + coeff + snake.size)) {
-            /* Adding the index of the first cell that should be animated */
+    if (snake.frontCell.x + snake.f_x == (this.width + coeff + snake.size)) {
+        /* Adding the index of the first cell that should be animated */
 
-            var animEnum = {
-                INDEX : snake.snake_array.length-1,
-                MOVETOX : (this.width + coeff + snake.size),
-                MOVETOY : snake.frontCell.y
-            };
-            snake.borderEffectOut.push(animEnum);
+        var animEnum = {
+            INDEX : snake.snake_array.length-1,
+            MOVETOX : (this.width + coeff + snake.size),
+            MOVETOY : snake.frontCell.y
+        };
+        snake.borderEffectOut.push(animEnum);
 
-            animEnum = {
-                INDEX : snake.snake_array.length,
-                TPTOX : -coeff,
-                TPTOY : snake.frontCell.y,
-                MOVETOX : coeff,
-                MOVETOY : snake.frontCell.y
-            };
-            snake.borderEffectIn.push(animEnum);
-        }
-        else if (snake.frontCell.x + snake.f_x == (-coeff - snake.size)) {
-            var animEnum = {
-                INDEX : snake.snake_array.length-1,
-                MOVETOX : (-coeff - snake.size),
-                MOVETOY : snake.frontCell.y
-            };
-            snake.borderEffectOut.push(animEnum);
-
-            animEnum = {
-                INDEX : snake.snake_array.length,
-                TPTOX : this.width + coeff,
-                TPTOY : snake.frontCell.y,
-                MOVETOX : this.width - coeff,
-                MOVETOY : snake.frontCell.y
-            };
-            snake.borderEffectIn.push(animEnum);
-        }
-        else if (snake.frontCell.y + snake.f_y == (this.height + coeff + snake.size)) {
-            var animEnum = {
-                INDEX : snake.snake_array.length-1,
-                MOVETOX : snake.frontCell.x,
-                MOVETOY : (this.height + coeff + snake.size)
-            };
-            snake.borderEffectOut.push(animEnum);
-
-            animEnum = {
-                INDEX : snake.snake_array.length,
-                TPTOX : snake.frontCell.x,
-                TPTOY : -coeff,
-                MOVETOX : snake.frontCell.x,
-                MOVETOY : coeff
-            };
-            snake.borderEffectIn.push(animEnum);
-        }
-        else if (snake.frontCell.y + snake.f_y == (-coeff - snake.size)) {
-            var animEnum = {
-                INDEX : snake.snake_array.length-1,
-                MOVETOX : snake.frontCell.x,
-                MOVETOY : (-coeff - snake.size)
-            };
-            snake.borderEffectOut.push(animEnum);
-
-            animEnum = {
-                INDEX : snake.snake_array.length,
-                TPTOX : snake.frontCell.x,
-                TPTOY : this.height + coeff,
-                MOVETOX : snake.frontCell.x,
-                MOVETOY : this.height - coeff
-            };
-            snake.borderEffectIn.push(animEnum);
-        }
+        animEnum = {
+            INDEX : snake.snake_array.length,
+            TPTOX : -coeff,
+            TPTOY : snake.frontCell.y,
+            MOVETOX : coeff,
+            MOVETOY : snake.frontCell.y
+        };
+        snake.borderEffectIn.push(animEnum);
     }
+    else if (snake.frontCell.x + snake.f_x == (-coeff - snake.size)) {
+        var animEnum = {
+            INDEX : snake.snake_array.length-1,
+            MOVETOX : (-coeff - snake.size),
+            MOVETOY : snake.frontCell.y
+        };
+        snake.borderEffectOut.push(animEnum);
+
+        animEnum = {
+            INDEX : snake.snake_array.length,
+            TPTOX : this.width + coeff,
+            TPTOY : snake.frontCell.y,
+            MOVETOX : this.width - coeff,
+            MOVETOY : snake.frontCell.y
+        };
+        snake.borderEffectIn.push(animEnum);
+    }
+    else if (snake.frontCell.y + snake.f_y == (this.height + coeff + snake.size)) {
+        var animEnum = {
+            INDEX : snake.snake_array.length-1,
+            MOVETOX : snake.frontCell.x,
+            MOVETOY : (this.height + coeff + snake.size)
+        };
+        snake.borderEffectOut.push(animEnum);
+
+        animEnum = {
+            INDEX : snake.snake_array.length,
+            TPTOX : snake.frontCell.x,
+            TPTOY : -coeff,
+            MOVETOX : snake.frontCell.x,
+            MOVETOY : coeff
+        };
+        snake.borderEffectIn.push(animEnum);
+    }
+    else if (snake.frontCell.y + snake.f_y == (-coeff - snake.size)) {
+        var animEnum = {
+            INDEX : snake.snake_array.length-1,
+            MOVETOX : snake.frontCell.x,
+            MOVETOY : (-coeff - snake.size)
+        };
+        snake.borderEffectOut.push(animEnum);
+
+        animEnum = {
+            INDEX : snake.snake_array.length,
+            TPTOX : snake.frontCell.x,
+            TPTOY : this.height + coeff,
+            MOVETOX : snake.frontCell.x,
+            MOVETOY : this.height - coeff
+        };
+        snake.borderEffectIn.push(animEnum);
+    }
+}
 }
 SnakeGame.prototype.pauseGame = function() {
     this.pause = true;
